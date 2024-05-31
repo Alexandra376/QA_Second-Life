@@ -1,2 +1,3 @@
 rootProject.name = 'QA_Project_SecondLife'
+include 'API_RA'
 
