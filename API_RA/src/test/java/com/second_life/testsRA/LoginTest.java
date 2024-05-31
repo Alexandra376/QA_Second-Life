@@ -44,7 +44,9 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginWithWrongPasswordTest() {
-        ErrorDto errorDto = given().body(LoginRequestDto.builder()
+        ErrorDto errorDto = given()
+                .contentType(ContentType.JSON)
+                .body(LoginRequestDto.builder()
                 .email("barak.obama@email.com")
                 .password("Security!23").build())
             .post("/auth/user/login")
@@ -57,9 +59,11 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginWithWrongEmailTest() {
-        ErrorDto errorDto = given().body(LoginRequestDto.builder()
-                        .email("barak.obamaemail.com")
-                        .password("Security!234").build())
+        ErrorDto errorDto = given()
+                    .contentType(ContentType.JSON)
+                    .body(LoginRequestDto.builder()
+                    .email("barak.obamaemail.com")
+                    .password("Security!234").build())
                 .post("/auth/user/login")
                 .then()
                 .assertThat().statusCode(400)
