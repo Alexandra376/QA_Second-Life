@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/API_RA" />
+            <option value="$PROJECT_DIR$/Second-Life_POM" />
           </set>
         </option>
       </GradleProjectSettings>
