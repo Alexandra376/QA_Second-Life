@@ -9,6 +9,6 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class LogoutRequestDto {
+public class LogoutResponseDto {
     private String token;
 }
