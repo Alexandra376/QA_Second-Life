@@ -1,6 +1,6 @@
 package com.second_life.testsRA;
 
-import com.second_life.LogoutResponseDto;
+import com.second_life.ResponseDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
@@ -19,7 +19,7 @@ public class LogoutTest extends BaseTest {
             .get("/auth/user/logout")
             .then()
             .assertThat().statusCode(200)
-            .extract().response().as(LogoutResponseDto.class);
+            .extract().response().as(ResponseDto.class);
     }
 
     @Test
@@ -32,6 +32,6 @@ public class LogoutTest extends BaseTest {
             .get("/auth/user/logout")
             .then()
             .assertThat().statusCode(403)
-            .extract().response().as(LogoutResponseDto.class);
+            .extract().response().as(ResponseDto.class);
     }
 }

@@ -1,7 +1,7 @@
 package com.second_life.testsRA;
 
 import com.second_life.CreateNewOfferRequestDto;
-import com.second_life.CreateNewOfferResponseDto;
+import com.second_life.ResponseDto;
 import com.second_life.ErrorDto;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
@@ -22,7 +22,7 @@ public class CreateNewOfferTest extends BaseTest {
 
     @Test
     public void createNewOfferSuccessTest() {
-        CreateNewOfferResponseDto dto = given()
+        ResponseDto dto = given()
         .contentType(ContentType.JSON)
         .body(createOffer)
         .header("Authorization", "Bearer " + TOKEN)
@@ -30,7 +30,7 @@ public class CreateNewOfferTest extends BaseTest {
         .post("/offers")
         .then()
         .assertThat().statusCode(201)
-        .extract().response().as(CreateNewOfferResponseDto.class);
+        .extract().response().as(ResponseDto.class);
     System.out.println(dto);
     }
 

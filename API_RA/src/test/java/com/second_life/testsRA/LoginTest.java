@@ -2,7 +2,7 @@ package com.second_life.testsRA;
 
 import com.second_life.ErrorDto;
 import com.second_life.LoginRequestDto;
-import com.second_life.LoginResponseDto;
+import com.second_life.ResponseDto;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
@@ -17,14 +17,14 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginSuccessTest() {
-        LoginResponseDto dto = given()
+        ResponseDto dto = given()
             .contentType(ContentType.JSON)
             .body(login)
             .when()
             .post("/auth/user/login")
             .then()
             .assertThat().statusCode(200)
-            .extract().response().as(LoginResponseDto.class);
+            .extract().response().as(ResponseDto.class);
         System.out.println(dto);
     }
 

@@ -2,7 +2,7 @@ package com.second_life.testsRA;
 
 import com.second_life.ErrorDto;
 import com.second_life.RegistrationRequestDto;
-import com.second_life.RegistrationResponseDto;
+import com.second_life.ResponseDto;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
@@ -19,14 +19,14 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void registerSuccessTest() {
-        RegistrationResponseDto dto = given()
+        ResponseDto dto = given()
                 .contentType(ContentType.JSON)
                 .body(registration)
                 .when()
                 .post("/users/register")
                 .then()
                 .assertThat().statusCode(201)
-                .extract().response().as(RegistrationResponseDto.class);
+                .extract().response().as(ResponseDto.class);
         System.out.println(dto);
     }
 
@@ -64,5 +64,4 @@ public class RegistrationTest extends BaseTest {
         System.out.println(errorDto.getMessage());
     }
 }
-
 //пустое поле

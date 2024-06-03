@@ -9,6 +9,6 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class RegistrationResponseDto {
-    private String token;
+public class IdRequestDto {
+    private int id;
 }
