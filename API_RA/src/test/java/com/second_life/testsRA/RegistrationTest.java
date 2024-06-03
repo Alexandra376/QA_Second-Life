@@ -64,3 +64,5 @@ public class RegistrationTest extends BaseTest {
         System.out.println(errorDto.getMessage());
     }
 }
+
+//пустое поле

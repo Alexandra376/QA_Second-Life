@@ -26,12 +26,12 @@ public class LogoutTest extends BaseTest {
     public void noValidAccessTokenTest() {
         RestAssured.defaultParser = Parser.JSON;
         given()
-                .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer " + INVALIDTOKEN)
-                .when()
-                .get("/auth/user/logout")
-                .then()
-                .assertThat().statusCode(403)
-                .extract().response().as(LogoutResponseDto.class);
+            .contentType(ContentType.JSON)
+            .header("Authorization", "Bearer " + INVALIDTOKEN)
+            .when()
+            .get("/auth/user/logout")
+            .then()
+            .assertThat().statusCode(403)
+            .extract().response().as(LogoutResponseDto.class);
     }
 }
