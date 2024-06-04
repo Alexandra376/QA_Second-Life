@@ -63,5 +63,20 @@ public class RegistrationTest extends BaseTest {
             .extract().response().as(ErrorDto.class);
         System.out.println(errorDto.getMessage());
     }
+
+    @Test
+    public void registerUserWithEmptyStringTest() {
+        ErrorDto errorDto = given()
+                .contentType(ContentType.JSON)
+                .body(RegistrationRequestDto.builder()
+                        .firstName("")
+                        .lastName("Leo")
+                        .email("example@gmail.com")
+                        .password("secure#passw0rd").build())
+                .post("/users/register")
+                .then()
+                .assertThat().statusCode(400)
+                .extract().response().as(ErrorDto.class);
+        System.out.println(errorDto.getMessage());
+    }
 }
-//пустое поле

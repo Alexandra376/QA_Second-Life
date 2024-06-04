@@ -53,6 +53,6 @@ public class CreateNewOfferTest extends BaseTest {
             .then()
             .assertThat().statusCode(400)
             .extract().response().as(ErrorDto.class);
-        System.out.println(errorDto);
+        System.out.println(errorDto.getMessage());
     }
 }
