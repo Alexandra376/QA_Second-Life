@@ -14,7 +14,7 @@ public class LogoutTest extends BaseTest {
         RestAssured.defaultParser = Parser.JSON;
         given()
             .contentType(ContentType.JSON)
-            .header("Authorization", "Bearer " + TOKEN)
+            .header(AUTH, "Bearer " + TOKEN)
             .when()
             .get("/auth/user/logout")
             .then()
@@ -27,7 +27,7 @@ public class LogoutTest extends BaseTest {
         RestAssured.defaultParser = Parser.JSON;
         given()
             .contentType(ContentType.JSON)
-            .header("Authorization", "Bearer " + INVALIDTOKEN)
+            .header(AUTH, "Bearer " + INVALIDTOKEN)
             .when()
             .get("/auth/user/logout")
             .then()

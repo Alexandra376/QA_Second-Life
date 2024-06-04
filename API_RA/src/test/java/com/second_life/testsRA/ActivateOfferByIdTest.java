@@ -16,7 +16,7 @@ public class ActivateOfferByIdTest extends BaseTest {
         ResponseDto dto = given()
             .contentType(ContentType.JSON)
             .body(activateOffer)
-            .header("Authorization", "Bearer " + TOKEN)
+            .header(AUTH, "Bearer " + TOKEN)
             .when()
             .put("/offers/recover/4")
             .then()

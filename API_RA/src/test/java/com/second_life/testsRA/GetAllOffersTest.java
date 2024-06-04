@@ -30,7 +30,7 @@ public class GetAllOffersTest extends BaseTest {
     public void getAllOffersSuccessTest() {
         ResponseDto dto = given()
             .contentType(ContentType.JSON)
-            .header("Authorization", "Bearer " + TOKEN)
+            .header(AUTH, "Bearer " + TOKEN)
             .when()
             .get("/offers/all")
             .then()

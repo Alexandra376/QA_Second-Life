@@ -1,6 +1,5 @@
 package com.second_life.testsRA;
 
-import com.second_life.IdRequestDto;
 import com.second_life.OfferParamsRequestDto;
 import com.second_life.ResponseDto;
 import io.restassured.http.ContentType;
@@ -34,7 +33,7 @@ public class GetAllOffersByUserIdTest extends BaseTest {
                 .contentType(ContentType.JSON)
                 .body(OfferParamsRequestDto.builder()
                         .id(4).build())
-                .header("Authorization", "Bearer " + TOKEN)
+                .header(AUTH, "Bearer " + TOKEN)
                 .when()
                 .get("/offers/user/4")
                 .then()

@@ -17,7 +17,7 @@ public class GetOfferByIdTest extends BaseTest {
         ResponseDto dto = given()
                 .contentType(ContentType.JSON)
                 .body(getOffer)
-                .header("Authorization", "Bearer " + TOKEN)
+                .header(AUTH, "Bearer " + TOKEN)
                 .when()
                 .get("/offers/4")
                 .then()

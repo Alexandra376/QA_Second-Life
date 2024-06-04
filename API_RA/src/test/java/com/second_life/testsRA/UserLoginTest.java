@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.StringContains.containsString;
 
-public class LoginTest extends BaseTest {
+public class UserLoginTest extends BaseTest {
     LoginRequestDto login = LoginRequestDto.builder()
         .email("barak.obama@email.com")
         .password("Security!234")
