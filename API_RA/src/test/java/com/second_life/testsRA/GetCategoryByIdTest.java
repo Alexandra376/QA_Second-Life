@@ -36,8 +36,8 @@ public class GetCategoryByIdTest extends BaseTest {
                 .when()
                 .get("/categories/50")
                 .then()
-                .assertThat().statusCode(500)
+                .assertThat().statusCode(404)
                 .extract().response().as(ErrorDto.class);
         System.out.println(errorDto);
-    } // данная ошибка не обрабатывается, отправлено на доработку
+    }
 }

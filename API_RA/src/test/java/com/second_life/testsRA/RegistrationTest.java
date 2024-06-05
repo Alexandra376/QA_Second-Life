@@ -11,7 +11,7 @@ import static org.hamcrest.core.StringContains.containsString;
 
 public class RegistrationTest extends BaseTest {
     RegistrationRequestDto registration = RegistrationRequestDto.builder()
-        .email("example@gmail.com")
+        .email("exxxample@gmail.com")
         .password("p@ssw0rd123")
         .firstName("Alex")
         .lastName("Laurentius")
@@ -58,7 +58,7 @@ public class RegistrationTest extends BaseTest {
                 .password("secure#passw0rd").build())
             .post("/users/register")
             .then()
-            .assertThat().statusCode(409)
+            .assertThat().statusCode(422)
             .body(containsString("Email example@gmail.com already exists"))
             .extract().response().as(ErrorDto.class);
         System.out.println(errorDto.getMessage());

@@ -18,4 +18,5 @@ public class CreateNewOfferRequestDto {
     private int winBid;
     private boolean isFree;
     private int categoryId;
+    private int locationId;
 }

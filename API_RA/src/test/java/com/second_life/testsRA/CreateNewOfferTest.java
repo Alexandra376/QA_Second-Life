@@ -17,7 +17,8 @@ public class CreateNewOfferTest extends BaseTest {
         .step(12)
         .winBid(1222)
         .isFree(false)
-        .categoryId(1)
+        .categoryId(4)
+        .locationId(2)
         .build();
 
     @Test
@@ -46,7 +47,8 @@ public class CreateNewOfferTest extends BaseTest {
                 .step(12)
                 .winBid(1222)
                 .isFree(true)
-                .categoryId(1).build())
+                .categoryId(1)
+                .locationId(2).build())
             .header(AUTH, "Bearer " + TOKEN)
             .when()
             .post("/offers")

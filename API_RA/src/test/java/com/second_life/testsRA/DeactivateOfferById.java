@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 
 public class DeactivateOfferById extends BaseTest {
     IdRequestDto deactivateOffer = IdRequestDto.builder()
-            .id(2).build();
+            .id(10).build();
 
     @Test
     public void deactivateOfferByIdSuccessTest() {
@@ -18,7 +18,7 @@ public class DeactivateOfferById extends BaseTest {
         .body(deactivateOffer)
         .header(AUTH, "Bearer " + TOKEN)
         .when()
-        .delete("offers/2")
+        .delete("offers/10")
             .then()
             .assertThat().statusCode(200)
             .extract().response().as(ResponseDto.class);
