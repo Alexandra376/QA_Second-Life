@@ -1,8 +1,8 @@
 package com.second_life.testsRA;
 
-import com.second_life.ErrorDto;
-import com.second_life.LoginRequestDto;
-import com.second_life.ResponseDto;
+import com.second_life.dto.ErrorDto;
+import com.second_life.dto.LoginRequestDto;
+import com.second_life.dto.ResponseDto;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
@@ -22,7 +22,7 @@ public class UserLoginTest extends BaseTest {
             .body(login)
             .when()
             .post("/auth/user/login")
-            .then()
+            .then().log().all()
             .assertThat().statusCode(200)
             .extract().response().as(ResponseDto.class);
         System.out.println(dto);
@@ -35,7 +35,7 @@ public class UserLoginTest extends BaseTest {
                 .body(login)
                 .when()
                 .post("/auth/user/login")
-                .then()
+                .then().log().all()
                 .assertThat().statusCode(200)
                 .body(containsString("accessToken"))
                 .extract().path("accessToken");

@@ -1,4 +1,4 @@
-package com.second_life;
+package com.second_life.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class ResponseDto {
-    private String token;
+public class ErrorDto {
+    private String message;
+    private String additionalMessage;
 }

@@ -1,7 +1,7 @@
 package com.second_life.testsRA;
 
-import com.second_life.IdRequestDto;
-import com.second_life.ResponseDto;
+import com.second_life.dto.IdRequestDto;
+import com.second_life.dto.ResponseDto;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 

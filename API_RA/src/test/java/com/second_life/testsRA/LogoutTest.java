@@ -1,14 +1,21 @@
 package com.second_life.testsRA;
 
-import com.second_life.ResponseDto;
+import com.second_life.dto.ResponseDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
 public class LogoutTest extends BaseTest {
+
+    @BeforeMethod
+    void precondition() {
+       new UserLoginTest().loginSuccessTest2();
+    }
+
     @Test
     public void successfulLogoutTest() {
         RestAssured.defaultParser = Parser.JSON;
@@ -17,7 +24,7 @@ public class LogoutTest extends BaseTest {
             .header(AUTH, "Bearer " + TOKEN)
             .when()
             .get("/auth/user/logout")
-            .then()
+            .then().log().all()
             .assertThat().statusCode(200)
             .extract().response().as(ResponseDto.class);
     }
