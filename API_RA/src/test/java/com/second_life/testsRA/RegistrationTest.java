@@ -78,5 +78,5 @@ public class RegistrationTest extends BaseTest {
                 .assertThat().statusCode(400)
                 .extract().response().as(ErrorDto.class);
         System.out.println(errorDto.getMessage());
-    } // заведен баг репорт
+    }
 }

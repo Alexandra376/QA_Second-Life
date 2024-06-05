@@ -70,5 +70,5 @@ public class AdminLoginTest extends BaseTest {
                 .body(containsString("Admin not found"))
                 .extract().response().as(ErrorDto.class);
         System.out.println(errorDto.getMessage());
-    } // баг - выдает ошибку 500
+    }
 }
