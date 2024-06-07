@@ -1,6 +1,6 @@
 package com.second_life.testsRA;
 
-import com.second_life.ResponseDto;
+import com.second_life.dto.ResponseDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;

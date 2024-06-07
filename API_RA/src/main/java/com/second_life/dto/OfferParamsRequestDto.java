@@ -1,4 +1,4 @@
-package com.second_life;
+package com.second_life.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +9,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class IdRequestDto {
+public class OfferParamsRequestDto {
+    private int page;
+    private int size;
+    private String sortBy;
     private int id;
 }

@@ -8,18 +8,18 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class GetCategoryByIdTest extends BaseTest {
-    IdRequestDto getCategoryByIdTest = IdRequestDto.builder()
-            .id(6).build();
+public class GetLocationByIdTest extends BaseTest {
+    IdRequestDto getLocatorById = IdRequestDto.builder()
+            .id(10).build();
 
     @Test
-    public void getCategoryByIdSuccessTest() {
+    public void getLocationSuccessTest() {
         ResponseDto dto = given()
                 .contentType(ContentType.JSON)
-                .body(getCategoryByIdTest)
+                .body(getLocatorById)
                 .header(AUTH, "Bearer " + TOKEN)
                 .when()
-                .get("/categories/3")
+                .get("locations/10")
                 .then()
                 .assertThat().statusCode(200)
                 .extract().response().as(ResponseDto.class);
@@ -27,17 +27,17 @@ public class GetCategoryByIdTest extends BaseTest {
     }
 
     @Test
-    public void getCategoryByIdNonExistIdTest() {
+    public void getLocationWithNonExistIdTest() {
         ErrorDto errorDto = given()
                 .contentType(ContentType.JSON)
                 .body(IdRequestDto.builder()
-                   .id(50).build())
+                    .id(100).build())
                 .header(AUTH, "Bearer " + TOKEN)
                 .when()
-                .get("/categories/50")
+                .get("locations/100")
                 .then()
                 .assertThat().statusCode(404)
                 .extract().response().as(ErrorDto.class);
-        System.out.println(errorDto);
+        System.out.println(errorDto.getMessage());
     }
 }

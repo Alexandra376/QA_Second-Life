@@ -1,4 +1,4 @@
-package com.second_life;
+package com.second_life.dto;
 
 import lombok.Builder;
 import lombok.Getter;

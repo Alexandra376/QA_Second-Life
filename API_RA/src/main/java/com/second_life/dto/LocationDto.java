@@ -1,4 +1,4 @@
-package com.second_life;
+package com.second_life.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,9 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class EditCategoryRequestDto {
-    private int id;
+public class LocationDto {
+    private String id;
     private String name;
-    private String description;
-    private boolean active;
 }

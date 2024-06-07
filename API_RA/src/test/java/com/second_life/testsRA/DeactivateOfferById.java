@@ -1,7 +1,7 @@
 package com.second_life.testsRA;
 
-import com.second_life.IdRequestDto;
-import com.second_life.ResponseDto;
+import com.second_life.dto.IdRequestDto;
+import com.second_life.dto.ResponseDto;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 
 public class DeactivateOfferById extends BaseTest {
     IdRequestDto deactivateOffer = IdRequestDto.builder()
-            .id(10).build();
+            .id(20).build();
 
     @Test
     public void deactivateOfferByIdSuccessTest() {
@@ -18,7 +18,7 @@ public class DeactivateOfferById extends BaseTest {
         .body(deactivateOffer)
         .header(AUTH, "Bearer " + TOKEN)
         .when()
-        .delete("offers/10")
+        .delete("offers/20")
             .then()
             .assertThat().statusCode(200)
             .extract().response().as(ResponseDto.class);

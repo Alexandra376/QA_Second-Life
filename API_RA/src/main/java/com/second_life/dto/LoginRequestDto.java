@@ -1,4 +1,4 @@
-package com.second_life;
+package com.second_life.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,9 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class RegistrationRequestDto {
+public class LoginRequestDto {
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
 }

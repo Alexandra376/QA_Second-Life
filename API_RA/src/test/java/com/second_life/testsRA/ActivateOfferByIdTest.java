@@ -1,8 +1,8 @@
 package com.second_life.testsRA;
 
-import com.second_life.ErrorDto;
-import com.second_life.IdRequestDto;
-import com.second_life.ResponseDto;
+import com.second_life.dto.ErrorDto;
+import com.second_life.dto.IdRequestDto;
+import com.second_life.dto.ResponseDto;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
@@ -31,10 +31,10 @@ public class ActivateOfferByIdTest extends BaseTest {
         ErrorDto errorDto = given()
                 .contentType(ContentType.JSON)
                 .body(IdRequestDto.builder()
-                   .id(20).build())
+                   .id(40).build())
                 .header(AUTH, "Bearer " + TOKEN)
                 .when()
-                .put("/offers/recover/20")
+                .put("/offers/recover/40")
                 .then()
                 .assertThat().statusCode(404)
                 .extract().response().as(ErrorDto.class);
