@@ -13,14 +13,14 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 
 public class ActivateOfferByIdTest extends BaseTest {
-    private IdRequestDto activateOffer;
+    private IdRequestDto validOffer;
     private IdRequestDto nonExistentOffer;
     private String activateOfferUrl;
 
     @BeforeClass
     public void setUp() throws IOException {
         super.setUp();
-        activateOffer = createIdRequestDto("activateOfferValidId");
+        validOffer = createIdRequestDto("activateOfferById.validId");
         nonExistentOffer = createIdRequestDto("activateOfferById.nonExistId");
         activateOfferUrl = httpProperties.getProperty("activateOfferById.url");
     }
@@ -38,7 +38,7 @@ public class ActivateOfferByIdTest extends BaseTest {
 
     @Test
     public void activateOfferByIdSuccessTest() {
-        ResponseDto dto = getValidatableResponse(activateOffer, activateOfferUrl + activateOffer.getId(), 200)
+        ResponseDto dto = getValidatableResponse(validOffer, activateOfferUrl + validOffer.getId(), 200)
                 .extract().response().as(ResponseDto.class);
         System.out.println(dto);
     }
