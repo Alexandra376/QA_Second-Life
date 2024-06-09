@@ -4,39 +4,48 @@ import com.second_life.dto.ErrorDto;
 import com.second_life.dto.IdRequestDto;
 import com.second_life.dto.ResponseDto;
 import io.restassured.http.ContentType;
+import io.restassured.response.ValidatableResponse;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 
 public class ActivateOfferByIdTest extends BaseTest {
-    IdRequestDto activateOffer = IdRequestDto.builder()
-            .id(4)
-            .build();
+    private IdRequestDto activateOffer;
+    private IdRequestDto nonExistentOffer;
+    private String activateOfferUrl;
+
+    @BeforeClass
+    public void setUp() throws IOException {
+        super.setUp();
+        activateOffer = createIdRequestDto("activateOfferValidId");
+        nonExistentOffer = createIdRequestDto("activateOfferById.nonExistId");
+        activateOfferUrl = httpProperties.getProperty("activateOfferById.url");
+    }
+
+    private ValidatableResponse getValidatableResponse(Object requestDto, String endpoint, int expectedStatusCode) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(requestDto)
+                .header(AUTH, "Bearer " + TOKEN)
+                .when()
+                .put(endpoint)
+                .then()
+                .assertThat().statusCode(expectedStatusCode);
+    }
+
     @Test
     public void activateOfferByIdSuccessTest() {
-        ResponseDto dto = given()
-            .contentType(ContentType.JSON)
-            .body(activateOffer)
-            .header(AUTH, "Bearer " + TOKEN)
-            .when()
-            .put("/offers/recover/4")
-            .then()
-            .assertThat().statusCode(200)
-            .extract().response().as(ResponseDto.class);
+        ResponseDto dto = getValidatableResponse(activateOffer, activateOfferUrl + activateOffer.getId(), 200)
+                .extract().response().as(ResponseDto.class);
         System.out.println(dto);
     }
 
     @Test
     public void activateNonExistentOfferByIdTest() {
-        ErrorDto errorDto = given()
-                .contentType(ContentType.JSON)
-                .body(IdRequestDto.builder()
-                   .id(40).build())
-                .header(AUTH, "Bearer " + TOKEN)
-                .when()
-                .put("/offers/recover/40")
-                .then()
-                .assertThat().statusCode(404)
+        ErrorDto errorDto = getValidatableResponse(nonExistentOffer, activateOfferUrl + nonExistentOffer.getId(), 404)
                 .extract().response().as(ErrorDto.class);
         System.out.println(errorDto.getMessage());
     }

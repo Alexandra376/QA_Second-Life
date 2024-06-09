@@ -1,6 +1,8 @@
 package com.second_life.testsRA;
 
+import com.second_life.dto.IdRequestDto;
 import com.second_life.dto.LoginRequestDto;
+import com.second_life.dto.RegistrationRequestDto;
 import com.second_life.utils.PropertiesLoader;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
@@ -37,6 +39,22 @@ public class BaseTest {
         return LoginRequestDto.builder()
                 .email(testProperties.getProperty(emailKey))
                 .password(testProperties.getProperty(passwordKey))
+                .build();
+    }
+
+    protected RegistrationRequestDto createRegistrationRequest(String emailKey, String passwordKey, String firstNameKey, String lastNameKey) {
+        return RegistrationRequestDto.builder()
+                .email(testProperties.getProperty(emailKey))
+                .password(testProperties.getProperty(passwordKey))
+                .firstName(testProperties.getProperty(firstNameKey))
+                .lastName(testProperties.getProperty(lastNameKey))
+                .build();
+    }
+
+    protected IdRequestDto createIdRequestDto(String idKey) {
+        int id = Integer.parseInt(testProperties.getProperty(idKey));
+        return IdRequestDto.builder()
+                .id(id)
                 .build();
     }
 }

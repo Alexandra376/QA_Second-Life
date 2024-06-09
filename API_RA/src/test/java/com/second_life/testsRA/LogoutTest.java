@@ -4,34 +4,32 @@ import com.second_life.dto.ResponseDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
+import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
 public class LogoutTest extends BaseTest {
+
+    private ValidatableResponse getValidatableResponse(String token, int expectedStatusCode) {
+        RestAssured.defaultParser = Parser.JSON;
+        return (ValidatableResponse) given()
+                .contentType(ContentType.JSON)
+                .header(AUTH, "Bearer " + token)
+                .when()
+                .get(httpProperties.getProperty("logout.url"))
+                .then()
+                .assertThat().statusCode(expectedStatusCode)
+                .extract().response().as(ResponseDto.class);
+    }
+
     @Test
     public void successfulLogoutTest() {
-        RestAssured.defaultParser = Parser.JSON;
-        given()
-            .contentType(ContentType.JSON)
-            .header(AUTH, "Bearer " + TOKEN)
-            .when()
-            .get("/auth/user/logout")
-            .then()
-            .assertThat().statusCode(200)
-            .extract().response().as(ResponseDto.class);
+        getValidatableResponse(TOKEN,200);
     }
 
     @Test
     public void noValidAccessTokenTest() {
-        RestAssured.defaultParser = Parser.JSON;
-        given()
-            .contentType(ContentType.JSON)
-            .header(AUTH, "Bearer " + INVALIDTOKEN)
-            .when()
-            .get("/auth/user/logout")
-            .then()
-            .assertThat().statusCode(403)
-            .extract().response().as(ResponseDto.class);
+        getValidatableResponse(INVALIDTOKEN, 403);
     }
 }

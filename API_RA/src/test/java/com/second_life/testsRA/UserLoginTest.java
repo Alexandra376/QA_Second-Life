@@ -21,9 +21,9 @@ public class UserLoginTest extends BaseTest {
     @BeforeClass
     public void setUp() throws IOException {
         super.setUp();
-        login = createLoginRequest("login.email", "login.password");
-        wrongPasswordLogin = createLoginRequest("login.email", "wrong.password");
-        wrongEmailLogin = createLoginRequest("wrong.email", "login.password");
+        login = createLoginRequest("userLogin.email", "userLogin.password");
+        wrongPasswordLogin = createLoginRequest("userLogin.email", "wrongUserLogin.password");
+        wrongEmailLogin = createLoginRequest("wrongUserLogin.email", "userLogin.password");
     }
 
     private ValidatableResponse getValidatableResponse(Object requestDto, int expectedStatusCode) {
@@ -31,7 +31,7 @@ public class UserLoginTest extends BaseTest {
                 .contentType(ContentType.JSON)
                 .body(requestDto)
                 .when()
-                .post(httpProperties.getProperty("login.url"))
+                .post(httpProperties.getProperty("userLogin.url"))
                 .then()
                 .assertThat().statusCode(expectedStatusCode);
     }
