@@ -9,6 +9,8 @@ import org.testng.annotations.BeforeMethod;
 import java.io.IOException;
 import java.util.Properties;
 
+import static com.second_life.testsRA.RegistrationTest.getRandomEmail;
+
 public class BaseTest {
     public static final String TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYXJhay5vYmFtYUBlbWFpbC5jb20iLCJleHAiOjE3MTgyMDcyNjAsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJlbWFpbCI6ImJhcmFrLm9iYW1hQGVtYWlsLmNvbSJ9.FZBGFeUDqBGplOR9iWvBuurlp2oNkuI6hSyjTdFQrfs";
     public static final String INVALIDTOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYXJhay5vYmFtYUBlbWFpbC5jb20iLCJleHAiOjE3MTc5NjU1MDksInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJlbWFpbCI6ImJhcmFrLm9iYW1hQGVtYWlsLmNvbSJ9.BuV_Gb1LZUUmFHxLbQIHtCvW3g2B7ResQS28p86eZN";
@@ -42,8 +44,9 @@ public class BaseTest {
 
     protected RegistrationRequestDto createRegistrationRequest(String emailKey, String passwordKey,
                                                                String firstNameKey, String lastNameKey) {
+        String email = emailKey != null ? testProperties.getProperty(emailKey) : getRandomEmail();
         return RegistrationRequestDto.builder()
-                .email(testProperties.getProperty(emailKey))
+                .email(email)
                 .password(testProperties.getProperty(passwordKey))
                 .firstName(testProperties.getProperty(firstNameKey))
                 .lastName(testProperties.getProperty(lastNameKey))
