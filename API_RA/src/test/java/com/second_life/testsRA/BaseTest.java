@@ -1,8 +1,6 @@
 package com.second_life.testsRA;
 
-import com.second_life.dto.IdRequestDto;
-import com.second_life.dto.LoginRequestDto;
-import com.second_life.dto.RegistrationRequestDto;
+import com.second_life.dto.*;
 import com.second_life.utils.PropertiesLoader;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
@@ -42,7 +40,8 @@ public class BaseTest {
                 .build();
     }
 
-    protected RegistrationRequestDto createRegistrationRequest(String emailKey, String passwordKey, String firstNameKey, String lastNameKey) {
+    protected RegistrationRequestDto createRegistrationRequest(String emailKey, String passwordKey,
+                                                               String firstNameKey, String lastNameKey) {
         return RegistrationRequestDto.builder()
                 .email(testProperties.getProperty(emailKey))
                 .password(testProperties.getProperty(passwordKey))
@@ -51,10 +50,50 @@ public class BaseTest {
                 .build();
     }
 
-    protected IdRequestDto createIdRequestDto(String idKey) {
+    protected IdRequestDto createIdRequest(String idKey) {
         int id = Integer.parseInt(testProperties.getProperty(idKey));
         return IdRequestDto.builder()
                 .id(id)
+                .build();
+    }
+
+    protected CreateNewOfferRequestDto createNewOfferRequest(String titleKey, String descriptionKey,
+                                                             String auctionDurationDaysKey, String startPriceKey,
+                                                             String stepKey, String winBidKey, String isFreeKey,
+                                                             String categoryIdKey, String locationIdKey) {
+
+        return CreateNewOfferRequestDto.builder()
+                .title(testProperties.getProperty(titleKey))
+                .description(testProperties.getProperty(descriptionKey))
+                .auctionDurationDays(Integer.parseInt(testProperties.getProperty(auctionDurationDaysKey)))
+                .startPrice(Integer.parseInt(testProperties.getProperty(startPriceKey)))
+                .step(Integer.parseInt(testProperties.getProperty(stepKey)))
+                .winBid(Integer.parseInt(testProperties.getProperty(winBidKey)))
+                .isFree(Boolean.parseBoolean(testProperties.getProperty(isFreeKey)))
+                .categoryId(Integer.parseInt(testProperties.getProperty(categoryIdKey)))
+                .locationId(Integer.parseInt(testProperties.getProperty(locationIdKey)))
+                .build();
+    }
+
+    protected EditCategoryRequestDto editCategoryRequest(String idKey, String nameKey,
+                                                           String descriptionKey, String activeKey) {
+
+        return EditCategoryRequestDto.builder()
+                .id(Integer.parseInt(testProperties.getProperty(idKey)))
+                .name(testProperties.getProperty(nameKey))
+                .description(testProperties.getProperty(descriptionKey))
+                .active(Boolean.parseBoolean(testProperties.getProperty(activeKey)))
+                .build();
+    }
+
+    protected OfferParamsRequestDto getAllOffersRequest(String pageKey, String sizeKey,
+                                                         String sortByKey, String idKey) {
+
+        return OfferParamsRequestDto.builder()
+                .page(Integer.parseInt(testProperties.getProperty(pageKey)))
+                .size(Integer.parseInt(testProperties.getProperty(sizeKey)))
+                .sortBy(testProperties.getProperty(sortByKey))
+                .id(Integer.parseInt(testProperties.getProperty(idKey)))
                 .build();
     }
 }

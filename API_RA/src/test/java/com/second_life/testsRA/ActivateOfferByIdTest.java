@@ -20,8 +20,8 @@ public class ActivateOfferByIdTest extends BaseTest {
     @BeforeClass
     public void setUp() throws IOException {
         super.setUp();
-        validOffer = createIdRequestDto("activateOfferById.validId");
-        nonExistentOffer = createIdRequestDto("activateOfferById.nonExistId");
+        validOffer = createIdRequest("activateOfferById.validId");
+        nonExistentOffer = createIdRequest("activateOfferById.nonExistId");
         activateOfferUrl = httpProperties.getProperty("activateOfferById.url");
     }
 
@@ -38,14 +38,14 @@ public class ActivateOfferByIdTest extends BaseTest {
 
     @Test
     public void activateOfferByIdSuccessTest() {
-        ResponseDto dto = getValidatableResponse(validOffer, activateOfferUrl + validOffer.getId(), 200)
+        ResponseDto dto = getValidatableResponse(validOffer, activateOfferUrl + "/" + validOffer.getId(), 200)
                 .extract().response().as(ResponseDto.class);
         System.out.println(dto);
     }
 
     @Test
     public void activateNonExistentOfferByIdTest() {
-        ErrorDto errorDto = getValidatableResponse(nonExistentOffer, activateOfferUrl + nonExistentOffer.getId(), 404)
+        ErrorDto errorDto = getValidatableResponse(nonExistentOffer, activateOfferUrl + "/" + nonExistentOffer.getId(), 404)
                 .extract().response().as(ErrorDto.class);
         System.out.println(errorDto.getMessage());
     }

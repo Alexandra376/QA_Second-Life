@@ -21,9 +21,9 @@ public class GetOfferByIdTest extends BaseTest {
     @BeforeClass
     public void setUp() throws IOException {
         super.setUp();
-        validOffer = createIdRequestDto("getOfferById.validId");
-        nonExistentOffer = createIdRequestDto("getOfferById.nonExistId");
-        getOfferByIdUrl = httpProperties.getProperty("getOfferById.url");
+        validOffer = createIdRequest("getOfferById.validId");
+        nonExistentOffer = createIdRequest("getOfferById.nonExistId");
+        getOfferByIdUrl = httpProperties.getProperty("offers.url");
     }
 
     private ValidatableResponse getValidatableResponse(Object requestDto, String endpoint, int expectedStatusCode) {
@@ -39,14 +39,14 @@ public class GetOfferByIdTest extends BaseTest {
 
     @Test
     public void getOfferByIdSuccessTest() {
-        ResponseDto dto = getValidatableResponse(validOffer, getOfferByIdUrl +  validOffer.getId(), 200)
+        ResponseDto dto = getValidatableResponse(validOffer, getOfferByIdUrl + "/" + validOffer.getId(), 200)
                 .extract().response().as(ResponseDto.class);
         System.out.println(dto);
     }
 
     @Test
     public void getOfferByIdWithNonExistIdTest() {
-        ErrorDto errordto = getValidatableResponse(nonExistentOffer, getOfferByIdUrl + nonExistentOffer.getId(), 404)
+        ErrorDto errordto = getValidatableResponse(nonExistentOffer, getOfferByIdUrl + "/" + nonExistentOffer.getId(), 404)
                 .extract().response().as(ErrorDto.class);
         System.out.println(errordto);
     }

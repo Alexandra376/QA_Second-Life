@@ -20,9 +20,9 @@ public class DeactivateOfferById extends BaseTest {
     @BeforeClass
     public void setUp() throws IOException {
         super.setUp();
-        validOffer = createIdRequestDto("deactivateOfferById.validId");
-        nonExistentOffer = createIdRequestDto("deactivateOfferById.nonExistId");
-        getOfferByIdUrl = httpProperties.getProperty("getOfferById.url");
+        validOffer = createIdRequest("deactivateOfferById.validId");
+        nonExistentOffer = createIdRequest("deactivateOfferById.nonExistId");
+        getOfferByIdUrl = httpProperties.getProperty("offers.url");
     }
 
     private ValidatableResponse getValidatableResponse(Object requestDto, String endpoint, int expectedStatusCode) {
@@ -38,14 +38,14 @@ public class DeactivateOfferById extends BaseTest {
 
     @Test
     public void deactivateOfferByIdSuccessTest() {
-        ResponseDto dto = getValidatableResponse(validOffer, getOfferByIdUrl +  validOffer.getId(),200)
+        ResponseDto dto = getValidatableResponse(validOffer, getOfferByIdUrl + "/" + validOffer.getId(),200)
             .extract().response().as(ResponseDto.class);
         System.out.println(dto);
     }
 
     @Test
     public void offerNotFound() {
-        Error errorDto = getValidatableResponse(nonExistentOffer,getOfferByIdUrl + nonExistentOffer.getId(),404)
+        Error errorDto = getValidatableResponse(nonExistentOffer,getOfferByIdUrl + "/" + nonExistentOffer.getId(),404)
                 .extract().response().as(Error.class);
         System.out.println(errorDto.getMessage());
     }
