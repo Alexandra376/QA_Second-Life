@@ -17,6 +17,7 @@ public class AdminLoginTest extends BaseTest {
     private LoginRequestDto login;
     private LoginRequestDto wrongPasswordLogin;
     private LoginRequestDto wrongEmailLogin;
+    private String adminLoginUrl;
 
     @BeforeClass
     public void setUp() throws IOException {
@@ -24,28 +25,19 @@ public class AdminLoginTest extends BaseTest {
         login = createLoginRequest("adminLogin.email", "adminLogin.password");
         wrongPasswordLogin = createLoginRequest("adminLogin.email", "wrongAdminLogin.password");
         wrongEmailLogin = createLoginRequest("wrongAdminLogin.email", "adminLogin.password");
-    }
-
-    private ValidatableResponse getValidatableResponse(Object requestDto, int expectedStatusCode) {
-        return given()
-                .contentType(ContentType.JSON)
-                .body(requestDto)
-                .when()
-                .post(httpProperties.getProperty("adminLogin.url"))
-                .then()
-                .assertThat().statusCode(expectedStatusCode);
+        adminLoginUrl = httpProperties.getProperty("adminLogin.url");
     }
 
     @Test
     public void loginSuccessTest() {
-        ResponseDto dto = getValidatableResponse(login, 200)
+        ResponseDto dto = withBodyResponse(login, adminLoginUrl, 200)
                 .extract().response().as(ResponseDto.class);
         System.out.println(dto);
     }
 
     @Test
     public void loginSuccessTest2() {
-        String responseToken = getValidatableResponse(login, 200)
+        String responseToken = withBodyResponse(login, adminLoginUrl,200)
                 .body(containsString("accessToken"))
                 .extract().path("accessToken");
         System.out.println(responseToken);
@@ -53,7 +45,7 @@ public class AdminLoginTest extends BaseTest {
 
     @Test
     public void loginWithWrongPasswordTest() {
-        ErrorDto errorDto = getValidatableResponse(wrongPasswordLogin, 401)
+        ErrorDto errorDto = withBodyResponse(wrongPasswordLogin, adminLoginUrl,401)
                 .body(containsString("Password is incorrect"))
                 .extract().response().as(ErrorDto.class);
         System.out.println(errorDto.getMessage());
@@ -61,7 +53,7 @@ public class AdminLoginTest extends BaseTest {
 
     @Test
     public void loginWithWrongEmailTest() {
-        ErrorDto errorDto =  getValidatableResponse(wrongEmailLogin, 400)
+        ErrorDto errorDto =  withBodyResponse(wrongEmailLogin, adminLoginUrl,400)
                 .body(containsString("Admin not found"))
                 .extract().response().as(ErrorDto.class);
         System.out.println(errorDto.getMessage());

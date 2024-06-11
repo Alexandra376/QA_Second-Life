@@ -3,58 +3,93 @@ package com.second_life.testsRA;
 import com.second_life.dto.ErrorDto;
 import com.second_life.dto.ResponseDto;
 import com.second_life.dto.UpdateOfferRequestDto;
-import io.restassured.http.ContentType;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.given;
+import java.io.IOException;
 
 public class UpdateOfferTest extends BaseTest {
-    UpdateOfferRequestDto updateOffer = UpdateOfferRequestDto.builder()
-        .id(4)
-        .title("Chair")
-        .description("In a big village")
-        .auctionDurationDays(3)
-        .startPrice(100)
-        .step(12)
-        .winBid(1222)
-        .isFree(false)
-        .categoryId(1)
-        .build();
+    private UpdateOfferRequestDto validInformation;
+    private UpdateOfferRequestDto invalidInputInformation;
+    private UpdateOfferRequestDto offerNotFoundInformation;
+    private UpdateOfferRequestDto unprocessableEntityInformation;
+    private String updateOfferUrl;
+
+    @BeforeClass
+    public void setUp() throws IOException {
+        super.setUp();
+        validInformation = updateOfferRequest(
+                "updateOffer.title",
+                "updateOffer.id",
+                "updateOffer.description",
+                "updateOffer.auctionDurationDays",
+                "updateOffer.startPrice",
+                "updateOffer.step",
+                "updateOffer.winBid",
+                "updateOffer.isFree",
+                "updateOffer.categoryId"
+        );
+        invalidInputInformation = updateOfferRequest(
+                "updateOffer.title",
+                "updateOffer.id",
+                "updateOffer.description",
+                "updateOffer.auctionDurationDays",
+                "updateOffer.startPrice",
+                "updateOffer.step",
+                "updateOffer.winBid",
+                "updateOffer.isFreeInvalidInput",
+                "updateOffer.categoryId"
+        );
+        offerNotFoundInformation = updateOfferRequest(
+                "updateOffer.title",
+                "updateOffer.idInvalid",
+                "updateOffer.description",
+                "updateOffer.auctionDurationDays",
+                "updateOffer.startPrice",
+                "updateOffer.step",
+                "updateOffer.winBid",
+                "updateOffer.isFreeInvalidInput",
+                "updateOffer.categoryId"
+        );
+        unprocessableEntityInformation = updateOfferRequest(
+                "updateOffer.title",
+                "updateOffer.id",
+                "updateOffer.description",
+                "updateOffer.auctionDurationDays",
+                "updateOffer.startPriceUnprocessableEntity",
+                "updateOffer.step",
+                "updateOffer.winBid",
+                "updateOffer.isFree",
+                "updateOffer.categoryId"
+        );
+        updateOfferUrl = httpProperties.getProperty("offers.url");
+    }
 
     @Test
     public void updateOfferSuccessTest() {
-        ResponseDto dto = given()
-            .contentType(ContentType.JSON)
-            .body(updateOffer)
-            .header(AUTH, "Bearer " + TOKEN)
-            .when()
-            .put("/offers")
-            .then()
-            .assertThat().statusCode(200)
+        ResponseDto dto = withHeaderTokenAndBodyPutResponse(validInformation, TOKEN, updateOfferUrl, 200)
             .extract().response().as(ResponseDto.class);
         System.out.println(dto);
     }
 
     @Test
-    public void updateOfferBadRequestTest() {
-        ErrorDto errorDto = given()
-            .contentType(ContentType.JSON)
-            .body(UpdateOfferRequestDto.builder()
-                .id(4)
-                .title("Upholstered chair")
-                .description("In a small village")
-                .auctionDurationDays(3)
-                .startPrice(100)
-                .step(12)
-                .winBid(1222)
-                .isFree(true)
-                .categoryId(1).build())
-            .header(AUTH, "Bearer " + TOKEN)
-            .when()
-            .put("/offers")
-            .then()
-            .assertThat().statusCode(400)
+    public void updateOfferInvalidInputTest() {
+        ErrorDto errorDto = withHeaderTokenAndBodyPutResponse(invalidInputInformation, TOKEN, updateOfferUrl,400)
             .extract().response().as(ErrorDto.class);
+        System.out.println(errorDto);
+    }
+
+    @Test
+    public void updateOfferNotFoundTest() {
+        ErrorDto errorDto = withHeaderTokenAndBodyPutResponse(offerNotFoundInformation, TOKEN, updateOfferUrl,404)
+                .extract().response().as(ErrorDto.class);
+        System.out.println(errorDto);
+    }
+
+    @Test
+    public void updateOfferUnprocessableEntityTest() {
+        ErrorDto errorDto = withHeaderTokenAndBodyPutResponse(unprocessableEntityInformation, TOKEN, updateOfferUrl,422)
+                .extract().response().as(ErrorDto.class);
         System.out.println(errorDto);
     }
 }

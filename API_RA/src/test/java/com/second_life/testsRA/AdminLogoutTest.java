@@ -2,33 +2,31 @@ package com.second_life.testsRA;
 
 import com.second_life.dto.ResponseDto;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
-import io.restassured.response.ValidatableResponse;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.given;
+import java.io.IOException;
 
 public class AdminLogoutTest extends BaseTest {
+    private String getAdminLogoutUrl;
 
-    private ValidatableResponse getValidatableResponse(String token, int expectedStatusCode) {
-        RestAssured.defaultParser = Parser.JSON;
-        return (ValidatableResponse) given()
-                .contentType(ContentType.JSON)
-                .header(AUTH, "Bearer " + token)
-                .when()
-                .get(httpProperties.getProperty("adminLogout.url"))
-                .then()
-                .assertThat().statusCode(expectedStatusCode)
-                .extract().response().as(ResponseDto.class);
+    @BeforeClass
+    public void setUp() throws IOException {
+        super.setUp();
+        getAdminLogoutUrl = httpProperties.getProperty("adminLogout.url");
     }
     @Test
     public void successfulLogoutTest() {
-        getValidatableResponse(ADMINTOKEN,200);
+        RestAssured.defaultParser = Parser.JSON;
+        withHeaderAndTokenResponse(ADMINTOKEN, getAdminLogoutUrl, 200)
+            .extract().response().as(ResponseDto.class);
     }
 
     @Test
     public void noValidAccessTokenTest() {
-        getValidatableResponse(INVALIDADMINTOKEN,403);
+        RestAssured.defaultParser = Parser.JSON;
+        withHeaderAndTokenResponse(INVALIDADMINTOKEN, getAdminLogoutUrl, 403)
+            .extract().response().as(Error.class);
     }
 }

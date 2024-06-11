@@ -2,34 +2,32 @@ package com.second_life.testsRA;
 
 import com.second_life.dto.ResponseDto;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
-import io.restassured.response.ValidatableResponse;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.given;
+import java.io.IOException;
 
 public class LogoutTest extends BaseTest {
+    private String getUserLogoutUrl;
 
-    private ValidatableResponse getValidatableResponse(String token, int expectedStatusCode) {
-        RestAssured.defaultParser = Parser.JSON;
-        return (ValidatableResponse) given()
-                .contentType(ContentType.JSON)
-                .header(AUTH, "Bearer " + token)
-                .when()
-                .get(httpProperties.getProperty("logout.url"))
-                .then()
-                .assertThat().statusCode(expectedStatusCode)
-                .extract().response().as(ResponseDto.class);
+    @BeforeClass
+    public void setUp() throws IOException {
+        super.setUp();
+        getUserLogoutUrl = httpProperties.getProperty("logout.url");
     }
 
     @Test
     public void successfulLogoutTest() {
-        getValidatableResponse(TOKEN,200);
+        RestAssured.defaultParser = Parser.JSON;
+        withHeaderAndTokenResponse(TOKEN, getUserLogoutUrl, 200)
+                .extract().response().as(ResponseDto.class);
     }
 
     @Test
     public void noValidAccessTokenTest() {
-        getValidatableResponse(INVALIDTOKEN, 403);
+        RestAssured.defaultParser = Parser.JSON;
+        withHeaderAndTokenResponse(INVALIDTOKEN, getUserLogoutUrl,403)
+                .extract().response().as(Error.class);
     }
 }

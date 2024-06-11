@@ -3,14 +3,10 @@ package com.second_life.testsRA;
 import com.second_life.dto.CreateNewOfferRequestDto;
 import com.second_life.dto.ResponseDto;
 import com.second_life.dto.ErrorDto;
-import io.restassured.http.ContentType;
-import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-
-import static io.restassured.RestAssured.given;
 
 public class CreateNewOfferTest extends BaseTest {
     private CreateNewOfferRequestDto validInformation;
@@ -45,27 +41,16 @@ public class CreateNewOfferTest extends BaseTest {
         createNewOfferUrl = httpProperties.getProperty("offers.url");
     }
 
-    private ValidatableResponse getValidatableResponse(Object requestDto, String endpoint, int expectedStatusCode) {
-        return given()
-                .contentType(ContentType.JSON)
-                .body(requestDto)
-                .header(AUTH, "Bearer " + TOKEN)
-                .when()
-                .post(endpoint)
-                .then()
-                .assertThat().statusCode(expectedStatusCode);
-    }
-
     @Test
     public void createNewOfferSuccessTest() {
-        ResponseDto dto = getValidatableResponse(validInformation, createNewOfferUrl,201)
+        ResponseDto dto = withHeaderTokenAndBodyPostResponse(validInformation, TOKEN, createNewOfferUrl, 201)
         .extract().response().as(ResponseDto.class);
     System.out.println(dto);
     }
 
     @Test
     public void createNewOfferBadRequestTest() {
-        ErrorDto errorDto = getValidatableResponse(badRequestInformation, createNewOfferUrl,400)
+        ErrorDto errorDto = withHeaderTokenAndBodyPostResponse(badRequestInformation, TOKEN, createNewOfferUrl,400)
             .extract().response().as(ErrorDto.class);
         System.out.println(errorDto.getMessage());
     }
