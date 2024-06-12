@@ -10,8 +10,8 @@ import java.io.IOException;
 
 public class UpdateOfferTest extends BaseTest {
     private UpdateOfferRequestDto validInformation;
-    private UpdateOfferRequestDto invalidInputInformation;
-    private UpdateOfferRequestDto offerNotFoundInformation;
+    private UpdateOfferRequestDto invalidInput;
+    private UpdateOfferRequestDto offerNotFound;
     private UpdateOfferRequestDto unprocessableEntityInformation;
     private String updateOfferUrl;
 
@@ -24,29 +24,26 @@ public class UpdateOfferTest extends BaseTest {
                 "updateOffer.description",
                 "updateOffer.auctionDurationDays",
                 "updateOffer.startPrice",
-                "updateOffer.step",
                 "updateOffer.winBid",
                 "updateOffer.isFree",
                 "updateOffer.categoryId"
         );
-        invalidInputInformation = updateOfferRequest(
+        invalidInput = updateOfferRequest(
                 "updateOffer.title",
                 "updateOffer.id",
                 "updateOffer.description",
                 "updateOffer.auctionDurationDays",
                 "updateOffer.startPrice",
-                "updateOffer.step",
                 "updateOffer.winBid",
                 "updateOffer.isFreeInvalidInput",
                 "updateOffer.categoryId"
         );
-        offerNotFoundInformation = updateOfferRequest(
+        offerNotFound = updateOfferRequest(
                 "updateOffer.title",
                 "updateOffer.idInvalid",
                 "updateOffer.description",
                 "updateOffer.auctionDurationDays",
                 "updateOffer.startPrice",
-                "updateOffer.step",
                 "updateOffer.winBid",
                 "updateOffer.isFreeInvalidInput",
                 "updateOffer.categoryId"
@@ -57,7 +54,6 @@ public class UpdateOfferTest extends BaseTest {
                 "updateOffer.description",
                 "updateOffer.auctionDurationDays",
                 "updateOffer.startPriceUnprocessableEntity",
-                "updateOffer.step",
                 "updateOffer.winBid",
                 "updateOffer.isFree",
                 "updateOffer.categoryId"
@@ -74,14 +70,14 @@ public class UpdateOfferTest extends BaseTest {
 
     @Test
     public void updateOfferInvalidInputTest() {
-        ErrorDto errorDto = withHeaderTokenAndBodyPutResponse(invalidInputInformation, TOKEN, updateOfferUrl,400)
+        ErrorDto errorDto = withHeaderTokenAndBodyPutResponse(invalidInput, TOKEN, updateOfferUrl,400)
             .extract().response().as(ErrorDto.class);
         System.out.println(errorDto);
     }
 
     @Test
     public void updateOfferNotFoundTest() {
-        ErrorDto errorDto = withHeaderTokenAndBodyPutResponse(offerNotFoundInformation, TOKEN, updateOfferUrl,404)
+        ErrorDto errorDto = withHeaderTokenAndBodyPutResponse(offerNotFound, TOKEN, updateOfferUrl,404)
                 .extract().response().as(ErrorDto.class);
         System.out.println(errorDto);
     }

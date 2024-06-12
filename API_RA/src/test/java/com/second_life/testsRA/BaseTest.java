@@ -16,9 +16,9 @@ import static com.second_life.testsRA.RegistrationTest.getRandomEmail;
 import static io.restassured.RestAssured.given;
 
 public class BaseTest {
-    public static final String TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYXJhay5vYmFtYUBlbWFpbC5jb20iLCJleHAiOjE3MTgyMDcyNjAsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJlbWFpbCI6ImJhcmFrLm9iYW1hQGVtYWlsLmNvbSJ9.FZBGFeUDqBGplOR9iWvBuurlp2oNkuI6hSyjTdFQrfs";
+    public static final String TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYXJhay5vYmFtYUBlbWFpbC5jb20iLCJleHAiOjE3MTg4MjExNTAsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJlbWFpbCI6ImJhcmFrLm9iYW1hQGVtYWlsLmNvbSJ9.Stdd0S_hYz89eC14lj2g3Z9ULQ30hhQMFsuwHm63k1I";
     public static final String INVALIDTOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYXJhay5vYmFtYUBlbWFpbC5jb20iLCJleHAiOjE3MTc5NjU1MDksInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJlbWFpbCI6ImJhcmFrLm9iYW1hQGVtYWlsLmNvbSJ9.BuV_Gb1LZUUmFHxLbQIHtCvW3g2B7ResQS28p86eZN";
-    public static final String ADMINTOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJleHAiOjE3MTgxMzE3MTQsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20ifQ.fh3yHfxhO17vpcXrZyMtalAM2EoYQDMBXvl04Thjmo0";
+    public static final String ADMINTOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJleHAiOjE3MTg4MTEyMzgsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20ifQ.mmp6XepnA_7p0bZbwiKxPFJdGriL15FLkA6Rv0aSfVg";
     public static final String INVALIDADMINTOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJleHAiOjE3MTgxMzE3MTQsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20ifQ.fh3yHfxhO17vpcXrZyMtalAM2EoYQDMBXvl04Thjmo";
     public static final String AUTH = "Authorization";
 
@@ -93,6 +93,17 @@ public class BaseTest {
                 .assertThat().statusCode(expectedStatusCode);
     }
 
+    ValidatableResponse withBodyAndTokenPatchResponse(Object requestDto, String token, String endpoint, int expectedStatusCode) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(requestDto)
+                .header(AUTH, "Bearer " + token)
+                .when()
+                .patch(endpoint)
+                .then()
+                .assertThat().statusCode(expectedStatusCode);
+    }
+
     ValidatableResponse withHeaderBodyAndTokenGetOptionalParamResponse(@Nullable Object requestDto, String token, String endpoint, int expectedStatusCode) {
         return given()
                 .contentType(ContentType.JSON)
@@ -141,19 +152,19 @@ public class BaseTest {
 
     protected CreateNewOfferRequestDto createNewOfferRequest(String titleKey, String descriptionKey,
                                                              String auctionDurationDaysKey, String startPriceKey,
-                                                             String stepKey, String winBidKey, String isFreeKey,
-                                                             String categoryIdKey, String locationIdKey) {
+                                                             String winBidKey, String isFreeKey, String categoryIdKey,
+                                                             String locationIdKey, String sendToVerificationKey) {
 
         return CreateNewOfferRequestDto.builder()
                 .title(testProperties.getProperty(titleKey))
                 .description(testProperties.getProperty(descriptionKey))
                 .auctionDurationDays(Integer.parseInt(testProperties.getProperty(auctionDurationDaysKey)))
                 .startPrice(Integer.parseInt(testProperties.getProperty(startPriceKey)))
-                .step(Integer.parseInt(testProperties.getProperty(stepKey)))
                 .winBid(Integer.parseInt(testProperties.getProperty(winBidKey)))
                 .isFree(Boolean.parseBoolean(testProperties.getProperty(isFreeKey)))
                 .categoryId(Integer.parseInt(testProperties.getProperty(categoryIdKey)))
                 .locationId(Integer.parseInt(testProperties.getProperty(locationIdKey)))
+                .sendToVerification(Boolean.parseBoolean(testProperties.getProperty(sendToVerificationKey)))
                 .build();
     }
 
@@ -181,8 +192,7 @@ public class BaseTest {
 
     protected UpdateOfferRequestDto updateOfferRequest(String titleKey, String idKey, String descriptionKey,
                                                              String auctionDurationDaysKey, String startPriceKey,
-                                                             String stepKey, String winBidKey, String isFreeKey,
-                                                             String categoryIdKey) {
+                                                             String winBidKey, String isFreeKey, String categoryIdKey) {
 
         return UpdateOfferRequestDto.builder()
                 .title(testProperties.getProperty(titleKey))
@@ -190,10 +200,16 @@ public class BaseTest {
                 .description(testProperties.getProperty(descriptionKey))
                 .auctionDurationDays(Integer.parseInt(testProperties.getProperty(auctionDurationDaysKey)))
                 .startPrice(Integer.parseInt(testProperties.getProperty(startPriceKey)))
-                .step(Integer.parseInt(testProperties.getProperty(stepKey)))
                 .winBid(Integer.parseInt(testProperties.getProperty(winBidKey)))
                 .isFree(Boolean.parseBoolean(testProperties.getProperty(isFreeKey)))
                 .categoryId(Integer.parseInt(testProperties.getProperty(categoryIdKey)))
+                .build();
+    }
+
+    protected OfferStatusRequestDto offerStatus(String idKey, String winnerBidIdKey) {
+        return OfferStatusRequestDto.builder()
+                .id(Integer.parseInt(testProperties.getProperty(idKey)))
+                .winnerBidId(Integer.parseInt(testProperties.getProperty(winnerBidIdKey)))
                 .build();
     }
 }

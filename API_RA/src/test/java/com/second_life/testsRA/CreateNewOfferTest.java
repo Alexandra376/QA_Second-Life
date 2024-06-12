@@ -21,22 +21,22 @@ public class CreateNewOfferTest extends BaseTest {
                 "createNewOffer.description",
                 "createNewOffer.auctionDurationDays",
                 "createNewOffer.startPrice",
-                "createNewOffer.step",
                 "createNewOffer.winBid",
                 "createNewOffer.isFree",
                 "createNewOffer.categoryId",
-                "createNewOffer.locationId"
+                "createNewOffer.locationId",
+                "createNewOffer.sendToVerification"
         );
         badRequestInformation = createNewOfferRequest(
                 "createNewOffer.title",
                 "createNewOffer.description",
                 "createNewOffer.auctionDurationDays",
                 "createNewOffer.startPrice",
-                "createNewOffer.step",
                 "createNewOffer.winBid",
                 "createNewOffer.isFreeBadRequest",
                 "createNewOffer.categoryIdBadRequest",
-                "createNewOffer.locationId"
+                "createNewOffer.locationId",
+                "createNewOffer.sendToVerification"
         );
         createNewOfferUrl = httpProperties.getProperty("offers.url");
     }

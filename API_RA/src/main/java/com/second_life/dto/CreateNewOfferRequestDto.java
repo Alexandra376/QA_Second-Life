@@ -14,9 +14,9 @@ public class CreateNewOfferRequestDto {
     private String description;
     private int auctionDurationDays;
     private int startPrice;
-    private int step;
     private int winBid;
     private boolean isFree;
     private int categoryId;
     private int locationId;
+    private boolean sendToVerification;
 }
