@@ -18,9 +18,9 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//button[contains(@class, 'css-7flg2j')]")
     WebElement logoutButton;
     @FindBy(xpath = "//p[text()='Field type email']")
-    WebElement wrongEmailLetter;
+    WebElement wrongEmailMessage;
     @FindBy(xpath = "//div[text()='Password is incorrect']")
-    WebElement wrongPasswordLetter;
+    WebElement wrongPasswordMessage;
 
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
@@ -63,9 +63,9 @@ public class LoginPage extends BasePage {
         checkElementIsDisplayed(logoutButton);
     }
     void checkWrongEmailLetterPresent() {
-        checkElementIsDisplayed(wrongEmailLetter);
+        checkElementIsDisplayed(wrongEmailMessage);
     }
     void checkWrongPasswordLetterPresent() {
-        checkElementIsDisplayed(wrongPasswordLetter);
+        checkElementIsDisplayed(wrongPasswordMessage);
     }
 }
