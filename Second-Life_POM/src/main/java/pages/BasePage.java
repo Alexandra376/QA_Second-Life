@@ -39,6 +39,6 @@ public class BasePage {
     }
 
     public void checkElementIsDisplayed(WebElement element) {
-        Assertions.assertTrue(element.isDisplayed(), String.format("Ожидаемы елемент по %s локатору не найден", element));
+        Assertions.assertTrue(element.isDisplayed(), String.format("Expected element at locator %s not found", element));
     }
 }
