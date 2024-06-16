@@ -51,7 +51,6 @@ public class RegistrationPage extends BasePage {
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
         checkWrongPasswordLetterWithoutSpecialCharacterAndMessagePresent();
-
     }
 
     public void wrongPasswordWithoutLetter(RegisterUser registerUser) {

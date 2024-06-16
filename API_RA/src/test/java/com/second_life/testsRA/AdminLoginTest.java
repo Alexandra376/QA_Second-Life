@@ -3,14 +3,12 @@ package com.second_life.testsRA;
 import com.second_life.dto.ErrorDto;
 import com.second_life.dto.LoginRequestDto;
 import com.second_life.dto.ResponseDto;
-import io.restassured.http.ContentType;
-import io.restassured.response.ValidatableResponse;
+import com.second_life.utils.TokenManager;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.StringContains.containsString;
 
 public class AdminLoginTest extends BaseTest {
@@ -37,10 +35,11 @@ public class AdminLoginTest extends BaseTest {
 
     @Test
     public void loginSuccessTest2() {
-        String responseToken = withBodyResponse(login, adminLoginUrl,200)
+        String adminToken = withBodyResponse(login, adminLoginUrl,200)
                 .body(containsString("accessToken"))
                 .extract().path("accessToken");
-        System.out.println(responseToken);
+        System.out.println(adminToken);
+        TokenManager.getInstance().setAdminToken(adminToken);
     }
 
     @Test

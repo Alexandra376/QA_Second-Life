@@ -3,6 +3,7 @@ package com.second_life.testsRA;
 import com.second_life.dto.ErrorDto;
 import com.second_life.dto.LoginRequestDto;
 import com.second_life.dto.ResponseDto;
+import com.second_life.utils.TokenManager;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -34,10 +35,11 @@ public class UserLoginTest extends BaseTest {
 
     @Test
     public void loginSuccessTest2() {
-        String responseToken = withBodyResponse(login, userLoginUrl, 200)
+        String userToken = withBodyResponse(login, userLoginUrl, 200)
                 .body(containsString("accessToken"))
                 .extract().path("accessToken");
-        System.out.println(responseToken);
+        System.out.println(userToken);
+        TokenManager.getInstance().setUserToken(userToken);
     }
 
     @Test

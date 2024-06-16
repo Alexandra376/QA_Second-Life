@@ -21,7 +21,8 @@ public class BaseTest {
     public static final String ADMINTOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJleHAiOjE3MTg4MTEyMzgsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20ifQ.mmp6XepnA_7p0bZbwiKxPFJdGriL15FLkA6Rv0aSfVg";
     public static final String INVALIDADMINTOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJleHAiOjE3MTgxMzE3MTQsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20ifQ.fh3yHfxhO17vpcXrZyMtalAM2EoYQDMBXvl04Thjmo";
     public static final String AUTH = "Authorization";
-
+//    String accessAdminToken = TokenManager.getInstance().getAdminToken();
+//    String accessUserToken = TokenManager.getInstance().getUserToken();
 
     @BeforeMethod
     public void init(){

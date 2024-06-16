@@ -10,11 +10,13 @@ import java.io.IOException;
 
 public class AdminLogoutTest extends BaseTest {
     private String getAdminLogoutUrl;
+//    private String accessAdminToken;
 
     @BeforeClass
     public void setUp() throws IOException {
         super.setUp();
         getAdminLogoutUrl = httpProperties.getProperty("adminLogout.url");
+//        accessAdminToken = TokenManager.getInstance().getAdminToken();
     }
     @Test
     public void successfulLogoutTest() {
