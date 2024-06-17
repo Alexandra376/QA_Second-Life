@@ -1,13 +1,14 @@
 package pages;
 
 import model.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
-    @FindBy(css = "[href='/auth/user/login']")
+    @FindBy(css = "[href='#/auth/user/login']")
     WebElement loginLink;
     @FindBy(xpath = "//input[contains(@name, 'email')]")
     WebElement emailInput;
@@ -22,27 +23,31 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[text()='Password is incorrect']")
     WebElement wrongPasswordMessage;
 
+    @BeforeEach
+    public void precondition(){
+        new LoginPage(driver,wait).clickOnLoginLink();
+    }
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
     public void login(User user) {
-        clickOnLoginLink();
+        precondition();
         fillUserLoginForm(user);
         clickOnSignInButton();
         checkIsLogOutPresent();
     }
 
     public void loginWrongEmail(User user) {
-        clickOnLoginLink();
+        precondition();
         fillUserLoginForm(user);
         clickOnSignInButton();
         checkWrongEmailLetterPresent();
     }
 
     public void loginWrongPassword(User user) {
-        clickOnLoginLink();
+        precondition();
         fillUserLoginForm(user);
         clickOnSignInButton();
         checkWrongPasswordLetterPresent();

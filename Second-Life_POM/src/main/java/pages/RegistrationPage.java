@@ -1,13 +1,14 @@
 package pages;
 
 import model.RegisterUser;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegistrationPage extends BasePage {
-    @FindBy(css = "[href='/auth/user/login']")
+    @FindBy(css = "[href='#/auth/user/login']")
     WebElement loginLink;
     @FindBy(xpath = ("//button[text()='Sign up']"))
     WebElement signUpButton;
@@ -36,8 +37,13 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//button[text()='ОК']")
     WebElement okButton;
 
+    @BeforeEach
+    public void precondition(){
+        new RegistrationPage(driver,wait).clickOnLoginLink();
+    }
+
     public void register(RegisterUser registerUser) {
-        clickOnLoginLink();
+        precondition();
         clickOnSignUpButton();
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
@@ -46,7 +52,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public void wrongPasswordWithoutSpecialCharacterAndLetter(RegisterUser registerUser) {
-        clickOnLoginLink();
+        precondition();
         clickOnSignUpButton();
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
@@ -54,7 +60,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public void wrongPasswordWithoutLetter(RegisterUser registerUser) {
-        clickOnLoginLink();
+        precondition();
         clickOnSignUpButton();
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
@@ -62,7 +68,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public void wrongEmail(RegisterUser registerUser) {
-        clickOnLoginLink();
+        precondition();
         clickOnSignUpButton();
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
@@ -70,7 +76,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public void emailAlreadyExist(RegisterUser registerUser) {
-        clickOnLoginLink();
+        precondition();
         clickOnSignUpButton();
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
@@ -93,9 +99,6 @@ public class RegistrationPage extends BasePage {
     }
     public void clickOnSignUpButton() {
         clickOnElement(signUpButton);
-    }
-    public void clickOnLogoutLink() {
-        clickOnElement(logoutButton);
     }
     public void clickOnOkButton() {
         clickOnElement(okButton);

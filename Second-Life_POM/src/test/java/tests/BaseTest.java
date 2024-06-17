@@ -1,12 +1,12 @@
 package tests;
 
-import model.RegisterUser;
-import model.User;
+import model.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.CreateNewOfferPage;
 import utils.PropertiesLoader;
 
 import java.io.IOException;
@@ -28,6 +28,11 @@ public class BaseTest {
     protected RegisterUser wrongPasswordRegisterUser1;
     protected RegisterUser wrongPasswordRegisterUser2;
     protected RegisterUser existEmail;
+    protected CreateNewOfferFree createNewOfferFree;
+    protected CreateNewOfferAuction createNewOfferAuction;
+    protected CreateNewOfferAuctionWinBid createNewOfferAuctionWithWinBid;
+    protected CreateNewOfferFree createNewOfferFreeWithIncorrectTitle;
+    protected CreateNewOfferFree createNewOfferFreeWithIncorrectDescription;
 
     @BeforeEach
     public void startDriver() throws IOException {
@@ -54,6 +59,26 @@ public class BaseTest {
         wrongEmailUser = new User(userWrongEmail, userPassword);
         wrongPasswordUser = new User(userEmail, userWrongPassword);
 
+        String createNewOfferTitle = testProperties.getProperty("createNewOfferUI.title");
+        String createNewOfferWithIncorrectTitle = testProperties.getProperty("createNewOfferUI.titleLessThan5Symbols");
+        String createNewOfferWithIncorrectDescription = testProperties.getProperty("createNewOfferUIr.descriptionLessThan5Symbols");
+        String createNewOfferDescription = testProperties.getProperty("createNewOfferUIr.description");
+        String createNewOfferStartPrice = testProperties.getProperty("createNewOfferUI.startPrice");
+        String createNewOfferWinBid = testProperties.getProperty("createNewOfferUI.winBid");
+        String createNewOfferAuctionDuration = testProperties.getProperty("createNewOfferUIr.auctionDuration");
+
+        int startPriceInt = Integer.parseInt(createNewOfferStartPrice);
+        int winBidInt = Integer.parseInt(createNewOfferWinBid);
+        int auctionDurationInt = Integer.parseInt(createNewOfferAuctionDuration);
+
+        createNewOfferFree = new CreateNewOfferFree(createNewOfferTitle, createNewOfferDescription, auctionDurationInt);
+        createNewOfferAuction = new CreateNewOfferAuction(createNewOfferTitle, createNewOfferDescription, startPriceInt, auctionDurationInt);
+        createNewOfferAuctionWithWinBid = new CreateNewOfferAuctionWinBid(createNewOfferTitle, createNewOfferDescription, startPriceInt, winBidInt, auctionDurationInt);
+        createNewOfferFreeWithIncorrectDescription = new CreateNewOfferFree(createNewOfferWithIncorrectTitle, createNewOfferWithIncorrectDescription, auctionDurationInt);
+        createNewOfferFreeWithIncorrectTitle = new CreateNewOfferFree(createNewOfferWithIncorrectTitle, createNewOfferDescription, auctionDurationInt);
+
+
+
         correctRegisterUser = new RegisterUser(getRandomEmail(), userRegisterPassword, userRegisterRepeatPassword, userRegisterFirstname, userRegisterLastname);
         wrongEmailRegisterUser = new RegisterUser(userRegisterWrongEmail, userRegisterPassword, userRegisterRepeatPassword, userRegisterFirstname, userRegisterLastname);
         wrongPasswordRegisterUser1 = new RegisterUser(getRandomEmail(), userRegisterWrongPassword1, userRegisterRepeatPassword1, userRegisterFirstname, userRegisterLastname);
@@ -65,6 +90,10 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.get(SECOND_LIFE);
+    }
+
+    public User getCorrectUser() {
+        return correctUser;
     }
 
     @AfterEach
