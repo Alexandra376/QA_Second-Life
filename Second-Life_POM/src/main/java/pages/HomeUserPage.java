@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage extends BasePage {
+public class HomeUserPage extends BasePage {
     @FindBy(xpath="//input[(@placeholder='Search...')]")
     WebElement inputSearch;
     @FindBy(xpath = "//div[contains(@class, 'css-1cwjfy3')]")
@@ -84,7 +84,7 @@ public class HomePage extends BasePage {
 
     @BeforeEach
     public void precondition(){
-        new HomePage(driver,wait).clickOnDropDown();
+        new HomeUserPage(driver,wait).clickOnDropDown();
     }
     public void clickOnDropDownAllGermany() {
         clickOnElement(allGermany);
@@ -254,7 +254,7 @@ public class HomePage extends BasePage {
         checkIsDropDownThüringenPresent();
     }
 
-    public HomePage(WebDriver driver, WebDriverWait wait) {
+    public HomeUserPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 }

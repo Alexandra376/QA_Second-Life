@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 
-public class PersonalInformationPage extends BasePage {
+public class PersonalInformationUserPage extends BasePage {
 
     @FindBy(xpath = "//li[text()='Personal information']")
     WebElement dropDownPersonalInformation;
@@ -39,14 +39,14 @@ public class PersonalInformationPage extends BasePage {
 
     private User user;
 
-    public PersonalInformationPage(WebDriver driver, WebDriverWait wait, User user) {
+    public PersonalInformationUserPage(WebDriver driver, WebDriverWait wait, User user) {
         super(driver, wait);
         this.user = user;
     }
 
     public void loginAndPrecondition() {
-        LoginPage loginPage = new LoginPage(driver, wait);
-        loginPage.login(user);
+        LoginUserPage loginUserPage = new LoginUserPage(driver, wait);
+        loginUserPage.login(user);
         clickOnPersonalAccountIcon();
         clickOnPersonalInformation();
     }

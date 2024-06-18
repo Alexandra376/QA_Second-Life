@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 
-public class CreateNewOfferPage extends BasePage {
+public class CreateNewOfferUserPage extends BasePage {
     @FindBy(xpath = "//input[@name='title']")
     WebElement inputTitle;
     @FindBy(xpath = "//textarea[@name='description']")
@@ -68,14 +68,14 @@ public class CreateNewOfferPage extends BasePage {
 
     private User user;
 
-    public CreateNewOfferPage(WebDriver driver, WebDriverWait wait, User user) {
+    public CreateNewOfferUserPage(WebDriver driver, WebDriverWait wait, User user) {
         super(driver, wait);
         this.user = user;
     }
 
     public void loginAndPrecondition() {
-        LoginPage loginPage = new LoginPage(driver, wait);
-        loginPage.login(user);
+        LoginUserPage loginUserPage = new LoginUserPage(driver, wait);
+        loginUserPage.login(user);
         clickOnPersonalAccountIcon();
         clickOnDropDownCreateNewOffer();
     }

@@ -1,13 +1,14 @@
 package pages;
 
 import model.User;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage extends BasePage {
+public class LoginUserPage extends BasePage {
     @FindBy(css = "[href='#/auth/user/login']")
     WebElement loginLink;
     @FindBy(xpath = "//input[contains(@name, 'email')]")
@@ -25,32 +26,11 @@ public class LoginPage extends BasePage {
 
     @BeforeEach
     public void precondition(){
-        new LoginPage(driver,wait).clickOnLoginLink();
+        new LoginUserPage(driver,wait).clickOnLoginLink();
     }
 
-    public LoginPage(WebDriver driver, WebDriverWait wait) {
+    public LoginUserPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
-    }
-
-    public void login(User user) {
-        precondition();
-        fillUserLoginForm(user);
-        clickOnSignInButton();
-        checkIsLogOutPresent();
-    }
-
-    public void loginWrongEmail(User user) {
-        precondition();
-        fillUserLoginForm(user);
-        clickOnSignInButton();
-        checkWrongEmailLetterPresent();
-    }
-
-    public void loginWrongPassword(User user) {
-        precondition();
-        fillUserLoginForm(user);
-        clickOnSignInButton();
-        checkWrongPasswordLetterPresent();
     }
 
     public void fillUserLoginForm(User user) {
@@ -64,13 +44,25 @@ public class LoginPage extends BasePage {
     public void clickOnSignInButton() {
         clickOnElement(signInButton);
     }
-    void checkIsLogOutPresent() {
-        checkElementIsDisplayed(logoutButton);
+
+    public void login(User user) {
+        precondition();
+        fillUserLoginForm(user);
+        clickOnSignInButton();
+        Assertions.assertTrue(logoutButton.isDisplayed(), "Logout is not displayed");
     }
-    void checkWrongEmailLetterPresent() {
-        checkElementIsDisplayed(wrongEmailMessage);
+
+    public void loginWrongEmail(User user) {
+        precondition();
+        fillUserLoginForm(user);
+        clickOnSignInButton();
+        Assertions.assertTrue(wrongEmailMessage.isDisplayed(), "Message wrong email is not displayed");
     }
-    void checkWrongPasswordLetterPresent() {
-        checkElementIsDisplayed(wrongPasswordMessage);
+
+    public void loginWrongPassword(User user) {
+        precondition();
+        fillUserLoginForm(user);
+        clickOnSignInButton();
+        Assertions.assertTrue(wrongPasswordMessage.isDisplayed(), "Message wrong password is not displayed");
     }
 }

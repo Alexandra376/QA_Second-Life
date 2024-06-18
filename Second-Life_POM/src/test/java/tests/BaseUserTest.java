@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.CreateNewOfferPage;
 import utils.PropertiesLoader;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ import java.time.Duration;
 import java.util.Properties;
 import java.util.Random;
 
-public class BaseTest {
+public class BaseUserTest {
     public static final String SECOND_LIFE = "https://second-life.space";
     public WebDriver driver;
     public WebDriverWait wait;

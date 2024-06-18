@@ -1,13 +1,14 @@
 package pages;
 
 import model.RegisterUser;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class RegistrationPage extends BasePage {
+public class RegistrationUserPage extends BasePage {
     @FindBy(css = "[href='#/auth/user/login']")
     WebElement loginLink;
     @FindBy(xpath = ("//button[text()='Sign up']"))
@@ -22,7 +23,7 @@ public class RegistrationPage extends BasePage {
     WebElement firstNameInput;
     @FindBy(xpath = ("//input[contains(@name, 'lastname')]"))
     WebElement lastNameInput;
-    @FindBy(xpath = "//button[contains(@class, 'css-7flg2j')]")
+    @FindBy(xpath = "//div[contains(@class, 'css-14vb45k')]")
     WebElement logoutButton;
     @FindBy(xpath = "//div[text()='Registration successful. Please sign in.']")
     WebElement successfulRegistrationMessage;
@@ -36,63 +37,9 @@ public class RegistrationPage extends BasePage {
     WebElement emailAlreadyExistMessage;
     @FindBy(xpath = "//button[text()='ОК']")
     WebElement okButton;
-
     @BeforeEach
     public void precondition(){
-        new RegistrationPage(driver,wait).clickOnLoginLink();
-    }
-
-    public void register(RegisterUser registerUser) {
-        precondition();
-        clickOnSignUpButton();
-        fillUserRegisterForm(registerUser);
-        clickOnSignUpButton();
-        checkRegistrationMessagePresent();
-        clickOnOkButton();
-    }
-
-    public void wrongPasswordWithoutSpecialCharacterAndLetter(RegisterUser registerUser) {
-        precondition();
-        clickOnSignUpButton();
-        fillUserRegisterForm(registerUser);
-        clickOnSignUpButton();
-        checkWrongPasswordLetterWithoutSpecialCharacterAndMessagePresent();
-    }
-
-    public void wrongPasswordWithoutLetter(RegisterUser registerUser) {
-        precondition();
-        clickOnSignUpButton();
-        fillUserRegisterForm(registerUser);
-        clickOnSignUpButton();
-        checkWrongPasswordWithoutLetterMessagePresent();
-    }
-
-    public void wrongEmail(RegisterUser registerUser) {
-        precondition();
-        clickOnSignUpButton();
-        fillUserRegisterForm(registerUser);
-        clickOnSignUpButton();
-        checkWrongEmailMessagePresent();
-    }
-
-    public void emailAlreadyExist(RegisterUser registerUser) {
-        precondition();
-        clickOnSignUpButton();
-        fillUserRegisterForm(registerUser);
-        clickOnSignUpButton();
-        checkEmailAlreadyExistMessagePresent();
-    }
-
-    public void fillUserRegisterForm(RegisterUser registerUser) {
-        fillInputField(emailInput, registerUser.getEmail());
-        fillInputField(passwordInput, registerUser.getPassword());
-        fillInputField(repeatPasswordInput, registerUser.getRepeatPassword());
-        fillInputField(firstNameInput, registerUser.getFirstname());
-        fillInputField(lastNameInput, registerUser.getLastname());
-    }
-
-    public RegistrationPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+        new RegistrationUserPage(driver,wait).clickOnLoginLink();
     }
     public void clickOnLoginLink() {
         clickOnElement(loginLink);
@@ -106,16 +53,58 @@ public class RegistrationPage extends BasePage {
     void checkRegistrationMessagePresent() {
         checkElementIsDisplayed(successfulRegistrationMessage);
     }
-    void checkWrongPasswordLetterWithoutSpecialCharacterAndMessagePresent() {
-        checkElementIsDisplayed(wrongPasswordWithoutSpecialCharacterAndLetterMessage);
+
+    public void register(RegisterUser registerUser) {
+        precondition();
+        clickOnSignUpButton();
+        fillUserRegisterForm(registerUser);
+        clickOnSignUpButton();
+        checkRegistrationMessagePresent();
+        clickOnOkButton();
+        Assertions.assertTrue(logoutButton.isDisplayed(), "Logout is not displayed");
     }
-    void checkWrongPasswordWithoutLetterMessagePresent() {
-        checkElementIsDisplayed(wrongPasswordWithoutLetterMessage);
+
+    public void wrongPasswordWithoutSpecialCharacterAndLetter(RegisterUser registerUser) {
+        precondition();
+        clickOnSignUpButton();
+        fillUserRegisterForm(registerUser);
+        clickOnSignUpButton();
+        Assertions.assertTrue(wrongPasswordWithoutSpecialCharacterAndLetterMessage.isDisplayed(), "Message Wrong password without special character and letter are not displayed");
     }
-    void checkWrongEmailMessagePresent() {
-        checkElementIsDisplayed(wrongEmail);
+
+    public void wrongPasswordWithoutLetter(RegisterUser registerUser) {
+        precondition();
+        clickOnSignUpButton();
+        fillUserRegisterForm(registerUser);
+        clickOnSignUpButton();
+        Assertions.assertTrue(wrongPasswordWithoutLetterMessage.isDisplayed(), "Message Wrong password without letter is not displayed");
     }
-    void checkEmailAlreadyExistMessagePresent() {
-        checkElementIsDisplayed(emailAlreadyExistMessage);
+
+    public void wrongEmail(RegisterUser registerUser) {
+        precondition();
+        clickOnSignUpButton();
+        fillUserRegisterForm(registerUser);
+        clickOnSignUpButton();
+        Assertions.assertTrue(wrongEmail.isDisplayed(), "Message Wrong email is not displayed");
+    }
+
+    public void emailAlreadyExist(RegisterUser registerUser) {
+        precondition();
+        clickOnSignUpButton();
+        fillUserRegisterForm(registerUser);
+        clickOnSignUpButton();
+        Assertions.assertTrue(emailAlreadyExistMessage.isDisplayed(), "Message Email already exist is not displayed");
+    }
+
+    public void fillUserRegisterForm(RegisterUser registerUser) {
+        fillInputField(emailInput, registerUser.getEmail());
+        fillInputField(passwordInput, registerUser.getPassword());
+        fillInputField(repeatPasswordInput, registerUser.getRepeatPassword());
+        fillInputField(firstNameInput, registerUser.getFirstname());
+        fillInputField(lastNameInput, registerUser.getLastname());
+    }
+
+    public RegistrationUserPage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
 }
