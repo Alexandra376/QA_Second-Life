@@ -51,8 +51,8 @@ public class CreateNewOfferPage extends BasePage {
     WebElement buttonSubmit;
     @FindBy(xpath = "//button[text()='Cancel']")
     WebElement buttonCancel;
-    @FindBy(xpath = "//button[text()='Upload Image']")
-    WebElement buttonUploadImage;
+    @FindBy(xpath = "//input[@id='file-upload']")
+    WebElement inputUploadImage;
     @FindBy(xpath = "//div[@class='css-1h5x3dy']")
     WebElement personalAccountIcon;
     @FindBy(xpath = "//li[text()='Create new offer']")
@@ -91,9 +91,6 @@ public class CreateNewOfferPage extends BasePage {
     }
     public void clickOnButtonCancel() {
         clickOnElement(buttonCancel);
-    }
-    public void clickOnButtonUploadImage() {
-        clickOnElement(buttonUploadImage);
     }
     public void clickOnDropDownTypeOffer() {
         clickOnElement(dropDownTypeOffer);
@@ -164,7 +161,7 @@ public class CreateNewOfferPage extends BasePage {
 
     public void addPhoto() {
         File file = new File("/Users/alexandra/test-pictures/bicycle.png");
-        buttonUploadImage.sendKeys(file.getAbsolutePath());
+        inputUploadImage.sendKeys(file.getAbsolutePath());
     }
 
     public void saveAsDraft(CreateNewOfferFree offer) {
@@ -176,7 +173,6 @@ public class CreateNewOfferPage extends BasePage {
         clickOnDropDownCategorySports();
         clickOnDropDownLocation();
         clickOnDropDownLocationBerlin();
-        clickOnButtonUploadImage();
         addPhoto();
         clickOnButtonSavaAsDraft();
         Assertions.assertTrue(titleFree.isDisplayed(), "Title Free is not visible.");
@@ -190,7 +186,6 @@ public class CreateNewOfferPage extends BasePage {
         clickOnDropDownCategoryElectronic();
         clickOnDropDownLocation();
         clickOnDropDownLocationHessen();
-        clickOnButtonUploadImage();
         addPhoto();
         clickOnButtonSubmit();
         Assertions.assertTrue(titleCurrentPrice.isDisplayed(), "Current price is not visible.");
@@ -204,7 +199,6 @@ public class CreateNewOfferPage extends BasePage {
         clickOnDropDownCategorySports();
         clickOnDropDownLocation();
         clickOnDropDownLocationBerlin();
-        clickOnButtonUploadImage();
         addPhoto();
         clickOnButtonCancel();
         Assertions.assertTrue(buttonCancel.isDisplayed(), "Button Cancel is not visible.");
@@ -218,7 +212,6 @@ public class CreateNewOfferPage extends BasePage {
         clickOnDropDownCategorySports();
         clickOnDropDownLocation();
         clickOnDropDownLocationBerlin();
-        clickOnButtonUploadImage();
         addPhoto();
         clickOnButtonCopyToDraft();
         Assertions.assertTrue(titleCurrentPrice.isDisplayed(), "Current price is not visible.");
@@ -232,7 +225,6 @@ public class CreateNewOfferPage extends BasePage {
         clickOnDropDownCategorySports();
         clickOnDropDownLocation();
         clickOnDropDownLocationBerlin();
-        clickOnButtonUploadImage();
         addPhoto();
         clickOnButtonSubmit();
         Assertions.assertTrue(paragraphTitle.isDisplayed(), "Title is not visible.");
@@ -246,7 +238,6 @@ public class CreateNewOfferPage extends BasePage {
         clickOnDropDownCategorySports();
         clickOnDropDownLocation();
         clickOnDropDownLocationBerlin();
-        clickOnButtonUploadImage();
         addPhoto();
         clickOnButtonSubmit();
         Assertions.assertTrue(paragraphDescription.isDisplayed(), "Title is not visible.");
