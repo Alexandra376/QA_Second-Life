@@ -61,7 +61,7 @@ public class RegistrationUserPage extends BasePage {
         clickOnSignUpButton();
         checkRegistrationMessagePresent();
         clickOnOkButton();
-        Assertions.assertTrue(logoutButton.isDisplayed(), "Logout is not displayed");
+        checkElementIsDisplayed(logoutButton);
     }
 
     public void wrongPasswordWithoutSpecialCharacterAndLetter(RegisterUser registerUser) {
@@ -69,7 +69,7 @@ public class RegistrationUserPage extends BasePage {
         clickOnSignUpButton();
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
-        Assertions.assertTrue(wrongPasswordWithoutSpecialCharacterAndLetterMessage.isDisplayed(), "Message Wrong password without special character and letter are not displayed");
+        checkElementIsDisplayed(wrongPasswordWithoutSpecialCharacterAndLetterMessage);
     }
 
     public void wrongPasswordWithoutLetter(RegisterUser registerUser) {
@@ -77,7 +77,7 @@ public class RegistrationUserPage extends BasePage {
         clickOnSignUpButton();
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
-        Assertions.assertTrue(wrongPasswordWithoutLetterMessage.isDisplayed(), "Message Wrong password without letter is not displayed");
+        checkElementIsDisplayed(wrongPasswordWithoutLetterMessage);
     }
 
     public void wrongEmail(RegisterUser registerUser) {
@@ -85,7 +85,7 @@ public class RegistrationUserPage extends BasePage {
         clickOnSignUpButton();
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
-        Assertions.assertTrue(wrongEmail.isDisplayed(), "Message Wrong email is not displayed");
+        checkElementIsDisplayed(wrongEmail);
     }
 
     public void emailAlreadyExist(RegisterUser registerUser) {
@@ -93,7 +93,7 @@ public class RegistrationUserPage extends BasePage {
         clickOnSignUpButton();
         fillUserRegisterForm(registerUser);
         clickOnSignUpButton();
-        Assertions.assertTrue(emailAlreadyExistMessage.isDisplayed(), "Message Email already exist is not displayed");
+        checkElementIsDisplayed(emailAlreadyExistMessage);
     }
 
     public void fillUserRegisterForm(RegisterUser registerUser) {

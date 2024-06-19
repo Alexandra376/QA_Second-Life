@@ -175,7 +175,7 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnDropDownLocationBerlin();
         addPhoto();
         clickOnButtonSavaAsDraft();
-        Assertions.assertTrue(titleFree.isDisplayed(), "Title Free is not visible.");
+        checkElementIsDisplayed(titleFree);
     }
     public void submit(CreateNewOfferAuction offer) {
         loginAndPrecondition();
@@ -188,7 +188,7 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnDropDownLocationHessen();
         addPhoto();
         clickOnButtonSubmit();
-        Assertions.assertTrue(titleCurrentPrice.isDisplayed(), "Current price is not visible.");
+        checkElementIsDisplayed(titleCurrentPrice);
     }
     public void cancel(CreateNewOfferAuctionWinBid offer) {
         loginAndPrecondition();
@@ -201,7 +201,7 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnDropDownLocationBerlin();
         addPhoto();
         clickOnButtonCancel();
-        Assertions.assertTrue(buttonCancel.isDisplayed(), "Button Cancel is not visible.");
+        checkElementIsDisplayed(buttonCancel);
     }
     public void copyToNewDraft(CreateNewOfferAuctionWinBid offer) {
         loginAndPrecondition();
@@ -214,7 +214,7 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnDropDownLocationBerlin();
         addPhoto();
         clickOnButtonCopyToDraft();
-        Assertions.assertTrue(titleCurrentPrice.isDisplayed(), "Current price is not visible.");
+        checkElementIsDisplayed(titleCurrentPrice);
     }
     public void submitIncorrectTitle(CreateNewOfferFree offer) {
         loginAndPrecondition();
@@ -227,7 +227,7 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnDropDownLocationBerlin();
         addPhoto();
         clickOnButtonSubmit();
-        Assertions.assertTrue(paragraphTitle.isDisplayed(), "Title is not visible.");
+        checkElementIsDisplayed(paragraphTitle);
     }
     public void submitIncorrectDescription(CreateNewOfferFree offer) {
         loginAndPrecondition();
@@ -240,6 +240,6 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnDropDownLocationBerlin();
         addPhoto();
         clickOnButtonSubmit();
-        Assertions.assertTrue(paragraphDescription.isDisplayed(), "Title is not visible.");
+        checkElementIsDisplayed(paragraphDescription);
     }
 }

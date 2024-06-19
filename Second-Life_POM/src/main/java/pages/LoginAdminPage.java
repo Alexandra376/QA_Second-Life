@@ -33,19 +33,19 @@ public class LoginAdminPage extends BasePage {
     public void login(User user) {
         fillUserLoginForm(user);
         clickOnSignInButton();
-        Assertions.assertTrue(logoutButton.isDisplayed(), "Logout is not displayed");
+        checkElementIsDisplayed(logoutButton);
     }
 
     public void loginWrongEmail(User user) {
         fillUserLoginForm(user);
         clickOnSignInButton();
-        Assertions.assertTrue(wrongEmailMessage.isDisplayed(), "Message wrong email is not displayed");
+        checkElementIsDisplayed(wrongEmailMessage);
     }
 
     public void loginWrongPassword(User user) {
         fillUserLoginForm(user);
         clickOnSignInButton();
-        Assertions.assertTrue(wrongPasswordMessage.isDisplayed(), "Message wrong password is not displayed");
+        checkElementIsDisplayed(wrongPasswordMessage);
     }
 
     public LoginAdminPage(WebDriver driver, WebDriverWait wait) {

@@ -49,20 +49,20 @@ public class LoginUserPage extends BasePage {
         precondition();
         fillUserLoginForm(user);
         clickOnSignInButton();
-        Assertions.assertTrue(logoutButton.isDisplayed(), "Logout is not displayed");
+        checkElementIsDisplayed(logoutButton);
     }
 
     public void loginWrongEmail(User user) {
         precondition();
         fillUserLoginForm(user);
         clickOnSignInButton();
-        Assertions.assertTrue(wrongEmailMessage.isDisplayed(), "Message wrong email is not displayed");
+        checkElementIsDisplayed(wrongEmailMessage);
     }
 
     public void loginWrongPassword(User user) {
         precondition();
         fillUserLoginForm(user);
         clickOnSignInButton();
-        Assertions.assertTrue(wrongPasswordMessage.isDisplayed(), "Message wrong password is not displayed");
+        checkElementIsDisplayed(wrongPasswordMessage);
     }
 }

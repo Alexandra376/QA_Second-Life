@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class HomeUserPage extends BasePage {
     @FindBy(xpath="//input[(@placeholder='Search...')]")
     WebElement inputSearch;
+    @FindBy(xpath="//button[@class='css-1tdncm9']")
+    WebElement buttonSearch;
     @FindBy(xpath = "//div[contains(@class, 'css-1cwjfy3')]")
     WebElement dropDown;
     @FindBy(xpath = "//li[text()='All Germany']")
@@ -75,6 +78,9 @@ public class HomeUserPage extends BasePage {
     public void clickOnInputSearch() {
         clickOnElement(inputSearch);
     }
+    public void clickOnButtonSearch() {
+        clickOnElement(buttonSearch);
+    }
     public void searchBar() {
         clickOnInputSearch();
     }
@@ -132,126 +138,80 @@ public class HomeUserPage extends BasePage {
         clickOnElement(thüringen);
     }
 
-    void checkIsDropDownAllGermanyPresent() {
-        checkElementIsDisplayed(allGermany1);
-    }
-    void checkIsDropDownBadenWurttembergPresent() {
-        checkElementIsDisplayed(badenWurttemberg1);
-    }
-    void checkIsDropDownBayernPresent() {
-        checkElementIsDisplayed(bayern1);
-    }
-    void checkIsDropDownBerlinPresent() {
-        checkElementIsDisplayed(berlin1);
-    }
-    void checkIsDropDownBrandenburgPresent() {
-        checkElementIsDisplayed(brandenburg1);
-    }
-    void checkIsDropDownHamburgPresent() {
-        checkElementIsDisplayed(hamburg1);
-    }
-    void checkIsDropDownHessenPresent() {
-        checkElementIsDisplayed(hessen1);
-    }
-    void checkIsDropDownMecklenburgVorpommernPresent() {
-        checkElementIsDisplayed(mecklenburgVorpommern1);
-    }
-    void checkIsDropDownNordrheinWestfalenPresent() {
-        checkElementIsDisplayed(nordrheinWestfalen1);
-    }
-    void checkIsDropDownNiedersachsenPresent() {
-        checkElementIsDisplayed(niedersachsen1);
-    }
-    void checkIsDropDownRheinlandPfalzPresent() {
-        checkElementIsDisplayed(rheinlandPfalz1);
-    }
-    void checkIsDropDownSachsenPresent() {
-        checkElementIsDisplayed(sachsen1);
-    }
-    void checkIsDropDownSachsenAnhaltPresent() {
-        checkElementIsDisplayed(sachsenAnhalt1);
-    }
-    void checkIsDropDownSchleswigHolsteinPresent() {
-        checkElementIsDisplayed(schleswigHolstein1);
-    }
-    void checkIsDropDownThüringenPresent() {
-        checkElementIsDisplayed(thüringen1);
-    }
-
     public void dropDownAllGermany() {
         precondition();
         clickOnDropDownAllGermany();
-        checkIsDropDownAllGermanyPresent();
+        checkElementIsDisplayed(allGermany1);
     }
     public void dropDownBadenWurttemberg() {
         precondition();
         clickOnDropDownBadenWurttemberg();
-        checkIsDropDownBadenWurttembergPresent();
+        checkElementIsDisplayed(badenWurttemberg1);
     }
     public void dropDownBayern() {
         precondition();
         clickOnDropDownBayern();
-        checkIsDropDownBayernPresent();
+        checkElementIsDisplayed(bayern1);
     }
     public void dropDownBerlin() {
         precondition();
         clickOnDropDownBerlin();
-        checkIsDropDownBerlinPresent();
+        checkElementIsDisplayed(berlin1);
     }
     public void dropDownBrandenburg() {
         precondition();
         clickOnDropDownBrandenburg();
-        checkIsDropDownBrandenburgPresent();
+        checkElementIsDisplayed(brandenburg1);
     }
     public void dropDownHamburg() {
         precondition();
         clickOnDropDownHamburg();
-        checkIsDropDownHamburgPresent();
+        checkElementIsDisplayed(hamburg1);
     }
     public void dropDownHessen() {
         precondition();
         clickOnDropDownHessen();
-        checkIsDropDownHessenPresent();
+        checkElementIsDisplayed(hessen1);
     }
     public void dropDownMecklenburgVorpommern() {
         precondition();
         clickOnDropDownMecklenburgVorpommern();
-        checkIsDropDownMecklenburgVorpommernPresent();
+        checkElementIsDisplayed(mecklenburgVorpommern1);
     }
     public void dropDownNiedersachsen() {
         precondition();
         clickOnDropDownNiedersachsen();
-        checkIsDropDownNiedersachsenPresent();
+        checkElementIsDisplayed(niedersachsen1);
     }
     public void dropDownNordrheinWestfalen() {
         precondition();
         clickOnDropDownNordrheinWestfalen();
-        checkIsDropDownNordrheinWestfalenPresent();
+        checkElementIsDisplayed(nordrheinWestfalen1);
     }
     public void dropDownRheinlandPfalz() {
         precondition();
         clickOnDropDownRheinlandPfalz();
-        checkIsDropDownRheinlandPfalzPresent();
+        checkElementIsDisplayed(rheinlandPfalz1);
     }
     public void dropDownSachsen() {
         precondition();
         clickOnDropDownSachsen();
-        checkIsDropDownSachsenPresent();
+        checkElementIsDisplayed(sachsen1);
     }
     public void dropDownSachsenAnhalt() {
         precondition();
         clickOnDropDownSachsenAnhalt();
-        checkIsDropDownSachsenAnhaltPresent();
+        checkElementIsDisplayed(sachsenAnhalt1);
     }
     public void dropDownSchleswigHolstein() {
         precondition();
         clickOnDropDownSchleswigHolstein();
-        checkIsDropDownSchleswigHolsteinPresent();
+        checkElementIsDisplayed(schleswigHolstein1);
     }
     public void dropDownThüringen() {
         precondition();
         clickOnDropDownThüringen();
-        checkIsDropDownThüringenPresent();
+        checkElementIsDisplayed(thüringen1);
     }
 
     public HomeUserPage(WebDriver driver, WebDriverWait wait) {

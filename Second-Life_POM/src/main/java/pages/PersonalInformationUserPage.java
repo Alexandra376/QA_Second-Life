@@ -61,6 +61,6 @@ public class PersonalInformationUserPage extends BasePage {
         clickOnButtonRemoveImg();
         clickOnButtonBack();
         clickOnButtonBack();
-        Assertions.assertTrue(homePageText.isDisplayed(), "Paragraph is not visible");
+        checkElementIsDisplayed(homePageText);
     }
 }
