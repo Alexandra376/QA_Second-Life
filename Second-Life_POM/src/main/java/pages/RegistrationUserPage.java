@@ -1,7 +1,6 @@
 package pages;
 
 import model.RegisterUser;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

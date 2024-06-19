@@ -1,6 +1,5 @@
 package pages;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -89,7 +88,7 @@ public class HomeUserPage extends BasePage {
     }
 
     @BeforeEach
-    public void precondition(){
+    public void dropDownPrecondition(){
         new HomeUserPage(driver,wait).clickOnDropDown();
     }
     public void clickOnDropDownAllGermany() {
@@ -139,79 +138,82 @@ public class HomeUserPage extends BasePage {
     }
 
     public void dropDownAllGermany() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownAllGermany();
         checkElementIsDisplayed(allGermany1);
     }
     public void dropDownBadenWurttemberg() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownBadenWurttemberg();
         checkElementIsDisplayed(badenWurttemberg1);
     }
     public void dropDownBayern() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownBayern();
         checkElementIsDisplayed(bayern1);
     }
     public void dropDownBerlin() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownBerlin();
         checkElementIsDisplayed(berlin1);
     }
     public void dropDownBrandenburg() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownBrandenburg();
         checkElementIsDisplayed(brandenburg1);
     }
     public void dropDownHamburg() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownHamburg();
         checkElementIsDisplayed(hamburg1);
     }
     public void dropDownHessen() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownHessen();
         checkElementIsDisplayed(hessen1);
     }
     public void dropDownMecklenburgVorpommern() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownMecklenburgVorpommern();
         checkElementIsDisplayed(mecklenburgVorpommern1);
     }
     public void dropDownNiedersachsen() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownNiedersachsen();
         checkElementIsDisplayed(niedersachsen1);
     }
     public void dropDownNordrheinWestfalen() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownNordrheinWestfalen();
         checkElementIsDisplayed(nordrheinWestfalen1);
     }
     public void dropDownRheinlandPfalz() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownRheinlandPfalz();
         checkElementIsDisplayed(rheinlandPfalz1);
     }
     public void dropDownSachsen() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownSachsen();
         checkElementIsDisplayed(sachsen1);
     }
     public void dropDownSachsenAnhalt() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownSachsenAnhalt();
         checkElementIsDisplayed(sachsenAnhalt1);
     }
     public void dropDownSchleswigHolstein() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownSchleswigHolstein();
         checkElementIsDisplayed(schleswigHolstein1);
     }
     public void dropDownThüringen() {
-        precondition();
+        dropDownPrecondition();
         clickOnDropDownThüringen();
         checkElementIsDisplayed(thüringen1);
+    }
+    public void checkSuccessWorkSearch() {
+
     }
 
     public HomeUserPage(WebDriver driver, WebDriverWait wait) {

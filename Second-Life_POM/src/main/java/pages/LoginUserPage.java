@@ -1,7 +1,6 @@
 package pages;
 
 import model.User;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,7 +16,7 @@ public class LoginUserPage extends BasePage {
     WebElement passwordInput;
     @FindBy(xpath = "//button[text()='Sign in']")
     WebElement signInButton;
-    @FindBy(xpath = "//button[contains(@class, 'css-7flg2j')]")
+    @FindBy(xpath = "//button[@class='css-7flg2j']")
     WebElement logoutButton;
     @FindBy(xpath = "//p[text()='Field type email']")
     WebElement wrongEmailMessage;

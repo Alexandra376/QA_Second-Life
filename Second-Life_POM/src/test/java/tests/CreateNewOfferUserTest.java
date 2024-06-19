@@ -12,23 +12,31 @@ public class CreateNewOfferUserTest extends BaseUserTest {
         new CreateNewOfferUserPage(driver, wait, getCorrectUser()).saveAsDraft(createNewOfferFree);
     }
     @Test
-    void successSubmitTest() {
-        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).submit(createNewOfferAuction);
+    void successSubmitOfferFreeTest() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).submitFreeOffer(createNewOfferFree);
     }
     @Test
-    void successCancelTest() {
-        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).cancel(createNewOfferAuctionWithWinBid);
+    void successSubmitOfferAuctionTest() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).submitOfferAuction(createNewOfferAuction);
     }
     @Test
-    void successCopyToNewDraftTest() {
-        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).copyToNewDraft(createNewOfferAuctionWithWinBid);
+    void successSubmitOfferAuctionWithWinBidTest() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).submitOfferAuctionWithWinBid(createNewOfferAuctionWithWinBid);
     }
     @Test
-    void incorrectTitleSaveAsDraftTest() {
-        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).submitIncorrectTitle(createNewOfferFreeWithIncorrectTitle);
+    void successCancelOfferAuctionWinBidTest() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).cancelOfferAuctionWinBid(createNewOfferAuctionWithWinBid);
     }
     @Test
-    void incorrectDescriptionSaveAsDraftTest() {
-        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).submitIncorrectDescription(createNewOfferFreeWithIncorrectDescription);
+    void successCopyToNewDraftOfferAuctionWithWinBidTest() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).copyToNewDraftOfferAuctionWithWinBid(createNewOfferAuctionWithWinBid);
+    }
+    @Test
+    void unsuccessSubmitOfferFreeWithIncorrectTitle() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).submitOfferFreeWithIncorrectTitle(createNewOfferFreeWithIncorrectTitle);
+    }
+    @Test
+    void unsuccessSubmitOfferFreeWithIncorrectDescriptionTest() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectUser()).submitOfferFreeWithIncorrectDescription(createNewOfferFreeWithIncorrectDescription);
     }
 }

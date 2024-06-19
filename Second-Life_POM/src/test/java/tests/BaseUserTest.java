@@ -76,8 +76,6 @@ public class BaseUserTest {
         createNewOfferFreeWithIncorrectDescription = new CreateNewOfferFree(createNewOfferWithIncorrectTitle, createNewOfferWithIncorrectDescription, auctionDurationInt);
         createNewOfferFreeWithIncorrectTitle = new CreateNewOfferFree(createNewOfferWithIncorrectTitle, createNewOfferDescription, auctionDurationInt);
 
-
-
         correctRegisterUser = new RegisterUser(getRandomEmail(), userRegisterPassword, userRegisterRepeatPassword, userRegisterFirstname, userRegisterLastname);
         wrongEmailRegisterUser = new RegisterUser(userRegisterWrongEmail, userRegisterPassword, userRegisterRepeatPassword, userRegisterFirstname, userRegisterLastname);
         wrongPasswordRegisterUser1 = new RegisterUser(getRandomEmail(), userRegisterWrongPassword1, userRegisterRepeatPassword1, userRegisterFirstname, userRegisterLastname);
@@ -93,6 +91,18 @@ public class BaseUserTest {
 
     public User getCorrectUser() {
         return correctUser;
+    }
+
+    public CreateNewOfferFree getOfferFree() {
+        return createNewOfferFree;
+    }
+
+    public CreateNewOfferAuction getOfferAuction() {
+        return createNewOfferAuction;
+    }
+
+    public CreateNewOfferAuctionWinBid getOfferAuctionWinBid() {
+        return createNewOfferAuctionWithWinBid;
     }
 
     @AfterEach

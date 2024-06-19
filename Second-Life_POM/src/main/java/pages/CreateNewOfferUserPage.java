@@ -4,7 +4,6 @@ import model.CreateNewOfferAuction;
 import model.CreateNewOfferAuctionWinBid;
 import model.CreateNewOfferFree;
 import model.User;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -177,7 +176,22 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnButtonSavaAsDraft();
         checkElementIsDisplayed(titleFree);
     }
-    public void submit(CreateNewOfferAuction offer) {
+
+    public void submitFreeOffer(CreateNewOfferFree offer) {
+        loginAndPrecondition();
+        clickOnDropDownTypeOffer();
+        clickOnDropDownTypeOfferAuction();
+        fillCreateNewOfferFree(offer);
+        clickOnDropDownCategory();
+        clickOnDropDownCategoryElectronic();
+        clickOnDropDownLocation();
+        clickOnDropDownLocationHessen();
+        addPhoto();
+        clickOnButtonSubmit();
+        checkElementIsDisplayed(titleCurrentPrice);
+    }
+
+    public void submitOfferAuction(CreateNewOfferAuction offer) {
         loginAndPrecondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferAuction();
@@ -190,7 +204,22 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnButtonSubmit();
         checkElementIsDisplayed(titleCurrentPrice);
     }
-    public void cancel(CreateNewOfferAuctionWinBid offer) {
+
+    public void submitOfferAuctionWithWinBid(CreateNewOfferAuctionWinBid offer) {
+        loginAndPrecondition();
+        clickOnDropDownTypeOffer();
+        clickOnDropDownTypeOfferAuction();
+        fillCreateNewOfferAuctionWinBid(offer);
+        clickOnDropDownCategory();
+        clickOnDropDownCategoryElectronic();
+        clickOnDropDownLocation();
+        clickOnDropDownLocationHessen();
+        addPhoto();
+        clickOnButtonSubmit();
+        checkElementIsDisplayed(titleCurrentPrice);
+    }
+
+    public void cancelOfferAuctionWinBid(CreateNewOfferAuctionWinBid offer) {
         loginAndPrecondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferAuctionWithWinBid();
@@ -203,7 +232,8 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnButtonCancel();
         checkElementIsDisplayed(buttonCancel);
     }
-    public void copyToNewDraft(CreateNewOfferAuctionWinBid offer) {
+
+    public void copyToNewDraftOfferAuctionWithWinBid(CreateNewOfferAuctionWinBid offer) {
         loginAndPrecondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferAuctionWithWinBid();
@@ -216,7 +246,8 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnButtonCopyToDraft();
         checkElementIsDisplayed(titleCurrentPrice);
     }
-    public void submitIncorrectTitle(CreateNewOfferFree offer) {
+
+    public void submitOfferFreeWithIncorrectTitle(CreateNewOfferFree offer) {
         loginAndPrecondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferFree();
@@ -229,7 +260,8 @@ public class CreateNewOfferUserPage extends BasePage {
         clickOnButtonSubmit();
         checkElementIsDisplayed(paragraphTitle);
     }
-    public void submitIncorrectDescription(CreateNewOfferFree offer) {
+
+    public void submitOfferFreeWithIncorrectDescription(CreateNewOfferFree offer) {
         loginAndPrecondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferFree();

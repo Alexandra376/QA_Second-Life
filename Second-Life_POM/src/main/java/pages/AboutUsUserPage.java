@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AboutUsPage extends BasePage {
+public class AboutUsUserPage extends BasePage {
     @FindBy(xpath = "//a[@href='#/aboutUs']")
     WebElement aboutUsLink;
     @FindBy(xpath = "//img[@src='/assets/tree-StE3drNv.png']")
@@ -17,7 +17,7 @@ public class AboutUsPage extends BasePage {
     WebElement imgQuestion;
     @BeforeEach
     public void precondition(){
-        new AboutUsPage(driver,wait).clickOnAboutUsLink();
+        new AboutUsUserPage(driver,wait).clickOnAboutUsLink();
     }
     public void clickOnAboutUsLink() {
         clickOnElement(aboutUsLink);
@@ -48,7 +48,7 @@ public class AboutUsPage extends BasePage {
         isImageQuestionPresent();
     }
 
-    public AboutUsPage(WebDriver driver, WebDriverWait wait) {
+    public AboutUsUserPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 }
