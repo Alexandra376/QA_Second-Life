@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginUserPage extends BasePage {
-    @FindBy(css = "[href='#/auth/user/login']")
+    @FindBy(xpath = "//a[@href='#/auth/user/login']")
     WebElement loginLink;
     @FindBy(xpath = "//input[contains(@name, 'email')]")
     WebElement emailInput;
@@ -45,6 +45,13 @@ public class LoginUserPage extends BasePage {
     }
 
     public void login(User user) {
+        precondition();
+        fillUserLoginForm(user);
+        clickOnSignInButton();
+        checkElementIsDisplayed(logoutButton);
+    }
+
+    public void loginTestAccount(User user) {
         precondition();
         fillUserLoginForm(user);
         clickOnSignInButton();

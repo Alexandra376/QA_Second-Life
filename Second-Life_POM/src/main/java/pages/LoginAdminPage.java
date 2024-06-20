@@ -1,6 +1,6 @@
 package pages;
 
-import model.User;
+import model.Admin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,35 +19,56 @@ public class LoginAdminPage extends BasePage {
     WebElement wrongEmailMessage;
     @FindBy(xpath = "//div[text()='Password is incorrect']")
     WebElement wrongPasswordMessage;
+    @FindBy(xpath = "//a[@href='#/aboutUs']")
+    WebElement aboutUsLink;
+    @FindBy(xpath = "//a[@href='https://second-life.space/#/admin']")
+    WebElement adminLink;
 
     public void clickOnSignInButton() {
         clickOnElement(signInButton);
     }
-
-    public void fillUserLoginForm(User user) {
-        fillInputField(emailInput, user.getEmail());
-        fillInputField(passwordInput, user.getPassword());
+    public void clickOnAboutUsLink() {
+        clickOnElement(aboutUsLink);
+    }
+    public void clickOnAdminLink() {
+        clickOnElement(adminLink);
     }
 
-    public void login(User user) {
-        fillUserLoginForm(user);
+    private Admin admin;
+
+    public LoginAdminPage(WebDriver driver, WebDriverWait wait, Admin admin) {
+        super(driver, wait);
+        this.admin = admin;
+    }
+
+    public void precondition() {
+        clickOnAboutUsLink();
+        clickOnAdminLink();
+    }
+
+    public void fillUserLoginForm(Admin admin) {
+        fillInputField(emailInput, admin.getEmail());
+        fillInputField(passwordInput, admin.getPassword());
+    }
+
+    public void login(Admin admin) {
+        precondition();
+        fillUserLoginForm(admin);
         clickOnSignInButton();
         checkElementIsDisplayed(logoutButton);
     }
 
-    public void loginWrongEmail(User user) {
-        fillUserLoginForm(user);
+    public void loginWrongEmail(Admin admin) {
+        precondition();
+        fillUserLoginForm(admin);
         clickOnSignInButton();
         checkElementIsDisplayed(wrongEmailMessage);
     }
 
-    public void loginWrongPassword(User user) {
-        fillUserLoginForm(user);
+    public void loginWrongPassword(Admin admin) {
+        precondition();
+        fillUserLoginForm(admin);
         clickOnSignInButton();
         checkElementIsDisplayed(wrongPasswordMessage);
-    }
-
-    public LoginAdminPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
     }
 }

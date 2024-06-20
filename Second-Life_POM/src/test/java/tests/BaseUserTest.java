@@ -15,13 +15,14 @@ import java.util.Properties;
 import java.util.Random;
 
 public class BaseUserTest {
-    public static final String SECOND_LIFE = "https://second-life.space";
+    public static final String SECOND_LIFE_USER = "https://second-life.space";
     public WebDriver driver;
     public WebDriverWait wait;
     protected Properties testProperties;
     protected User correctUser;
     protected User wrongEmailUser;
     protected User wrongPasswordUser;
+    protected User correctTestUser;
     protected RegisterUser correctRegisterUser;
     protected RegisterUser wrongEmailRegisterUser;
     protected RegisterUser wrongPasswordRegisterUser1;
@@ -32,6 +33,12 @@ public class BaseUserTest {
     protected CreateNewOfferAuctionWinBid createNewOfferAuctionWithWinBid;
     protected CreateNewOfferFree createNewOfferFreeWithIncorrectTitle;
     protected CreateNewOfferFree createNewOfferFreeWithIncorrectDescription;
+    protected Admin correctAdmin;
+    protected Admin wrongEmailAdmin;
+    protected Admin wrongPasswordAdmin;
+    public Admin getCorrectAdmin() {
+        return correctAdmin;
+    }
 
     @BeforeEach
     public void startDriver() throws IOException {
@@ -40,6 +47,8 @@ public class BaseUserTest {
 
         String userEmail = testProperties.getProperty("userLogin.email");
         String userPassword = testProperties.getProperty("userLogin.password");
+        String userTestEmail = testProperties.getProperty("userLoginTest.email");
+        String userTestPassword = testProperties.getProperty("userLoginTest.password");
         String userWrongEmail = testProperties.getProperty("userLogin.wrongEmail");
         String userWrongPassword = testProperties.getProperty("userLogin.wrongPassword");
 
@@ -55,6 +64,7 @@ public class BaseUserTest {
         String userRegisterExistEmail = testProperties.getProperty("userRegister.existEmail");
 
         correctUser = new User(userEmail, userPassword);
+        correctTestUser = new User(userTestEmail, userTestPassword);
         wrongEmailUser = new User(userWrongEmail, userPassword);
         wrongPasswordUser = new User(userEmail, userWrongPassword);
 
@@ -82,15 +92,28 @@ public class BaseUserTest {
         wrongPasswordRegisterUser2 = new RegisterUser(getRandomEmail(), userRegisterWrongPassword2, userRegisterRepeatPassword2, userRegisterFirstname, userRegisterLastname);
         existEmail = new RegisterUser(userRegisterExistEmail, userRegisterPassword, userRegisterRepeatPassword, userRegisterFirstname, userRegisterLastname);
 
+        String adminEmail = testProperties.getProperty("adminLogin.email");
+        String adminPassword = testProperties.getProperty("adminLogin.password");
+        String adminWrongEmail = testProperties.getProperty("adminLogin.wrongEmail");
+        String adminWrongPassword = testProperties.getProperty("adminLogin.wrongPassword");
+
+        correctAdmin = new Admin(adminEmail, adminPassword);
+        wrongEmailAdmin = new Admin(adminWrongEmail, adminPassword);
+        wrongPasswordAdmin = new Admin(adminEmail, adminWrongPassword);
+
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        driver.get(SECOND_LIFE);
+        driver.get(SECOND_LIFE_USER);
     }
 
     public User getCorrectUser() {
         return correctUser;
+    }
+
+    public User getCorrectTestUser() {
+        return correctTestUser;
     }
 
     public CreateNewOfferFree getOfferFree() {

@@ -8,7 +8,10 @@ public class LoginUserTest extends BaseUserTest {
     void successLoginTest() {
         new LoginUserPage(driver, wait).login(correctUser);
     }
-
+    @Test
+    void successLoginTestTest() {
+        new LoginUserPage(driver, wait).loginTestAccount(correctTestUser);
+    }
     @Test
     void wrongEmailLoginTest() {
         new LoginUserPage(driver, wait).loginWrongEmail(wrongEmailUser);

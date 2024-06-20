@@ -1,5 +1,6 @@
 package pages;
 
+import model.Admin;
 import model.CreateNewOfferFree;
 import model.User;
 import org.openqa.selenium.WebDriver;
@@ -14,12 +15,12 @@ public class FreeOfferPage extends BasePage {
     WebElement dropDownFreeOffer;
     @FindBy(xpath = "//button[text()='Apply']")
     WebElement buttonApply;
-    @FindBy(xpath = "//h3[text()='Bicycle']")
-    WebElement title;
     @FindBy(xpath = "//button[text()='Back']")
     WebElement buttonBack;
     @FindBy(xpath = "//button[text()='Cancel']")
     WebElement buttonCancel;
+    @FindBy(xpath="//button[@class='css-7flg2j']")
+    WebElement buttonLogout;
 
     public void clickOnOffersLink() {
         clickOnElement(offersLink);
@@ -30,23 +31,27 @@ public class FreeOfferPage extends BasePage {
     public void clickOnButtonApply() {
         clickOnElement(buttonApply);
     }
-    public void clickOnTitle() {
-        clickOnElement(title);
-    }
     public void clickOnButtonBack() {
         clickOnElement(buttonBack);
     }
     public void clickOnButtonCancel() {
         clickOnElement(buttonCancel);
     }
+    public void clickOnLogout() {
+        clickOnElement(buttonLogout);
+    }
 
     private User user;
+    private User testUser;
+    private Admin admin;
     private CreateNewOfferFree offerFree;
 
-    public FreeOfferPage(WebDriver driver, WebDriverWait wait, User user, CreateNewOfferFree offerFree) {
+    public FreeOfferPage(WebDriver driver, WebDriverWait wait, User user, User testUser, CreateNewOfferFree offerFree, Admin admin) {
         super(driver, wait);
         this.user = user;
+        this.admin = admin;
         this.offerFree = offerFree;
+        this.testUser = testUser;
     }
 
     public void login() {
@@ -64,17 +69,28 @@ public class FreeOfferPage extends BasePage {
         createNewOfferUserPage.submitFreeOffer(offerFree);
     }
 
+    public void createNewOfferFreeWithTestAccount() {
+        CreateNewOfferUserPage createNewOfferUserPage = new CreateNewOfferUserPage(driver, wait, testUser);
+        createNewOfferUserPage.submitFreeOfferWithTestAccount(offerFree);
+    }
+
+    public void verifyOffer() {
+        VerificationAdminPage verifyOfferPage = new VerificationAdminPage(driver, wait, admin);
+        verifyOfferPage.verifyOffer();
+    }
+
     public void applyForFreeOffer() {
+        createNewOfferFreeWithTestAccount();
+        verifyOffer();
+        clickOnLogout();
         login();
         precondition();
-        clickOnTitle();
         clickOnButtonApply();
-        clickOnButtonBack();
     }
 
     public void cancelFreeOffer() {
-        login();
         createNewOfferFree();
+        verifyOffer();
         precondition();
         clickOnButtonCancel();
     }

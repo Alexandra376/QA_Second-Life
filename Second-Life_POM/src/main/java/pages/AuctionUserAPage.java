@@ -1,5 +1,6 @@
 package pages;
 
+import model.Admin;
 import model.CreateNewOfferAuction;
 import model.CreateNewOfferAuctionWinBid;
 import model.User;
@@ -31,7 +32,7 @@ public class AuctionUserAPage extends BasePage {
     public void clickOnOffersLink() {
         clickOnElement(offersLink);
     }
-    public void clickOnDropDownFreeOffer() {
+    public void clickOnDropDownAuctionOffer() {
         clickOnElement(dropDownAuctionOffer);
     }
     public void clickOnButtonApply() {
@@ -57,12 +58,14 @@ public class AuctionUserAPage extends BasePage {
     }
 
     private User user;
+    private Admin admin;
     private CreateNewOfferAuction offerAuction;
     private CreateNewOfferAuctionWinBid offerAuctionWinBid;
 
-    public AuctionUserAPage(WebDriver driver, WebDriverWait wait, User user, CreateNewOfferAuction offerAuction, CreateNewOfferAuctionWinBid offerAuctionWinBid) {
+    public AuctionUserAPage(WebDriver driver, WebDriverWait wait, User user, CreateNewOfferAuction offerAuction, CreateNewOfferAuctionWinBid offerAuctionWinBid, Admin admin) {
         super(driver, wait);
         this.user = user;
+        this.admin = admin;
         this.offerAuction = offerAuction;
         this.offerAuctionWinBid = offerAuctionWinBid;
     }
@@ -74,7 +77,7 @@ public class AuctionUserAPage extends BasePage {
 
     public void precondition() {
         clickOnOffersLink();
-        clickOnDropDownFreeOffer();
+        clickOnDropDownAuctionOffer();
     }
 
     public void createNewOfferAuction() {
@@ -85,6 +88,11 @@ public class AuctionUserAPage extends BasePage {
     public void createNewOfferAuctionWinBid() {
         CreateNewOfferUserPage createNewOfferUserPage = new CreateNewOfferUserPage(driver, wait, user);
         createNewOfferUserPage.submitOfferAuctionWithWinBid(offerAuctionWinBid);
+    }
+
+    public void verifyOffer() {
+        VerificationAdminPage verifyOfferPage = new VerificationAdminPage(driver, wait, admin);
+        verifyOfferPage.verifyOffer();
     }
 
     public void applyAuction() {
@@ -104,8 +112,8 @@ public class AuctionUserAPage extends BasePage {
     }
 
     public void cancelAuction() {
-        login();
         createNewOfferAuction();
+        verifyOffer();
         precondition();
         clickOnTitle();
         clickOnButtonCancel();
@@ -113,8 +121,8 @@ public class AuctionUserAPage extends BasePage {
     }
 
     public void cancelAuctionWinBid() {
-        login();
         createNewOfferAuctionWinBid();
+        verifyOffer();
         precondition();
         clickOnTitle();
         clickOnButtonCancel();

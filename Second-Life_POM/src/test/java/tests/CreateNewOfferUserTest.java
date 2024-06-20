@@ -39,4 +39,16 @@ public class CreateNewOfferUserTest extends BaseUserTest {
     void unsuccessSubmitOfferFreeWithIncorrectDescriptionTest() {
         new CreateNewOfferUserPage(driver, wait, getCorrectUser()).submitOfferFreeWithIncorrectDescription(createNewOfferFreeWithIncorrectDescription);
     }
+    @Test
+    void successSubmitOfferFreeNewAccountTest() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectTestUser()).submitFreeOffer(createNewOfferFree);
+    }
+    @Test
+    void successSubmitOfferAuctionNewAccountTest() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectTestUser()).submitOfferAuction(createNewOfferAuction);
+    }
+    @Test
+    void successSubmitOfferAuctionWithWinBidNewAccountTest() {
+        new CreateNewOfferUserPage(driver, wait, getCorrectTestUser()).submitOfferAuctionWithWinBid(createNewOfferAuctionWithWinBid);
+    }
 }
