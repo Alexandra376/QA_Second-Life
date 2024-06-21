@@ -10,6 +10,6 @@ public class FreeOfferTest extends BaseUserTest {
     }
     @Test
     void successfullyCancelFreeOfferTest() {
-        new FreeOfferPage(driver, wait, getCorrectUser(), getCorrectTestUser(), getOfferFree(), getCorrectAdmin()).cancelFreeOffer();
+        new FreeOfferPage(driver, wait, getCorrectUser(), null, getOfferFree(), getCorrectAdmin()).cancelFreeOffer();
     }
 }

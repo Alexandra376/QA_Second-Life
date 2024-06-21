@@ -1,12 +1,10 @@
 package tests;
 
-import model.User;
 import org.junit.jupiter.api.Test;
 import pages.CreateNewOfferUserPage;
 
 public class CreateNewOfferUserTest extends BaseUserTest {
 
-    private User user;
     @Test
     void successSaveAsDraftTest() {
         new CreateNewOfferUserPage(driver, wait, getCorrectUser()).saveAsDraft(createNewOfferFree);
@@ -41,14 +39,14 @@ public class CreateNewOfferUserTest extends BaseUserTest {
     }
     @Test
     void successSubmitOfferFreeNewAccountTest() {
-        new CreateNewOfferUserPage(driver, wait, getCorrectTestUser()).submitFreeOffer(createNewOfferFree);
+        new CreateNewOfferUserPage(driver, wait, getCorrectTestUser()).submitFreeOfferWithTestAccount(createNewOfferFree);
     }
     @Test
     void successSubmitOfferAuctionNewAccountTest() {
-        new CreateNewOfferUserPage(driver, wait, getCorrectTestUser()).submitOfferAuction(createNewOfferAuction);
+        new CreateNewOfferUserPage(driver, wait, getCorrectTestUser()).submitOfferAuctionWithTestAccount(createNewOfferAuction);
     }
     @Test
     void successSubmitOfferAuctionWithWinBidNewAccountTest() {
-        new CreateNewOfferUserPage(driver, wait, getCorrectTestUser()).submitOfferAuctionWithWinBid(createNewOfferAuctionWithWinBid);
+        new CreateNewOfferUserPage(driver, wait, getCorrectTestUser()).submitOfferAuctionWithWinBidWithTestAccount(createNewOfferAuctionWithWinBid);
     }
 }

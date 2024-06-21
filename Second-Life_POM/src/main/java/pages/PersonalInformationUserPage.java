@@ -36,26 +36,25 @@ public class PersonalInformationUserPage extends BasePage {
         clickOnElement(buttonRemoveImage);
     }
 
-    private User user;
 
     public PersonalInformationUserPage(WebDriver driver, WebDriverWait wait, User user) {
         super(driver, wait);
         this.user = user;
     }
 
-    public void loginAndPrecondition() {
-        LoginUserPage loginUserPage = new LoginUserPage(driver, wait);
-        loginUserPage.login(user);
+    public void precondition() {
         clickOnPersonalAccountIcon();
         clickOnPersonalInformation();
     }
+
     public void addPhoto() {
         File file = new File("/Users/alexandra/test-pictures/bicycle.png");
         inputUploadImage.sendKeys(file.getAbsolutePath());
     }
 
     public void successfullyUploadPhoto() {
-        loginAndPrecondition();
+        login();
+        precondition();
         addPhoto();
         clickOnButtonRemoveImg();
         clickOnButtonBack();

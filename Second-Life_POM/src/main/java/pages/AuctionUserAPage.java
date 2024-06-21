@@ -22,12 +22,12 @@ public class AuctionUserAPage extends BasePage {
     WebElement buttonBack;
     @FindBy(xpath = "//button[text()='Cancel']")
     WebElement buttonCancel;
-    @FindBy(xpath = "//button[@class='css-7b3zi8']")
+    @FindBy(xpath = "//button[.//p[text()='Buyout']]")
     WebElement buttonBuyOut;
-    @FindBy(xpath = "//button[@class='css-1bd4r8c']")
-    WebElement modalWindowConfirmAction;
-    @FindBy(xpath = "//button[text()='OK']")
+    @FindBy(xpath = "//button[text()='ОК']")
     WebElement buttonOk;
+    @FindBy(xpath="//button[@class='css-7flg2j']")
+    WebElement buttonLogout;
 
     public void clickOnOffersLink() {
         clickOnElement(offersLink);
@@ -50,29 +50,21 @@ public class AuctionUserAPage extends BasePage {
     public void clickOnButtonBuyOut() {
         clickOnElement(buttonBuyOut);
     }
-    public void checkIsModalWindowDisplayed() {
-        checkElementIsDisplayed(modalWindowConfirmAction);
-    }
     public void clickOnButtonOk() {
         clickOnElement(buttonOk);
     }
+    public void clickOnLogout() {
+        clickOnElement(buttonLogout);
+    }
 
-    private User user;
-    private Admin admin;
-    private CreateNewOfferAuction offerAuction;
-    private CreateNewOfferAuctionWinBid offerAuctionWinBid;
-
-    public AuctionUserAPage(WebDriver driver, WebDriverWait wait, User user, CreateNewOfferAuction offerAuction, CreateNewOfferAuctionWinBid offerAuctionWinBid, Admin admin) {
+    public AuctionUserAPage(WebDriver driver, WebDriverWait wait, User user,  User testUser, CreateNewOfferAuction offerAuction, CreateNewOfferAuctionWinBid offerAuctionWinBid, Admin admin) {
         super(driver, wait);
         this.user = user;
         this.admin = admin;
+        this.testUser = testUser;
         this.offerAuction = offerAuction;
         this.offerAuctionWinBid = offerAuctionWinBid;
-    }
 
-    public void login() {
-        LoginUserPage loginUserPage = new LoginUserPage(driver, wait);
-        loginUserPage.login(user);
     }
 
     public void precondition() {
@@ -80,34 +72,22 @@ public class AuctionUserAPage extends BasePage {
         clickOnDropDownAuctionOffer();
     }
 
-    public void createNewOfferAuction() {
-        CreateNewOfferUserPage createNewOfferUserPage = new CreateNewOfferUserPage(driver, wait, user);
-        createNewOfferUserPage.submitOfferAuction(offerAuction);
-    }
-
-    public void createNewOfferAuctionWinBid() {
-        CreateNewOfferUserPage createNewOfferUserPage = new CreateNewOfferUserPage(driver, wait, user);
-        createNewOfferUserPage.submitOfferAuctionWithWinBid(offerAuctionWinBid);
-    }
-
-    public void verifyOffer() {
-        VerificationAdminPage verifyOfferPage = new VerificationAdminPage(driver, wait, admin);
-        verifyOfferPage.verifyOffer();
-    }
-
     public void applyAuction() {
+        createNewOfferAuctionWithTestAccount();
+        verifyOffer();
+        clickOnLogout();
         login();
         precondition();
-        clickOnTitle();
         clickOnButtonApply();
-        clickOnButtonBack();
     }
 
     public void buyoutAuctionWinBid() {
+        createNewOfferAuctionWithWinBidTestAccount();
+        verifyOffer();
+        clickOnLogout();
         login();
         precondition();
         clickOnButtonBuyOut();
-        checkIsModalWindowDisplayed();
         clickOnButtonOk();
     }
 

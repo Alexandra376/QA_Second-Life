@@ -41,11 +41,6 @@ public class FreeOfferPage extends BasePage {
         clickOnElement(buttonLogout);
     }
 
-    private User user;
-    private User testUser;
-    private Admin admin;
-    private CreateNewOfferFree offerFree;
-
     public FreeOfferPage(WebDriver driver, WebDriverWait wait, User user, User testUser, CreateNewOfferFree offerFree, Admin admin) {
         super(driver, wait);
         this.user = user;
@@ -54,29 +49,9 @@ public class FreeOfferPage extends BasePage {
         this.testUser = testUser;
     }
 
-    public void login() {
-        LoginUserPage loginUserPage = new LoginUserPage(driver, wait);
-        loginUserPage.login(user);
-    }
-
     public void precondition() {
         clickOnOffersLink();
         clickOnDropDownFreeOffer();
-    }
-
-    public void createNewOfferFree() {
-        CreateNewOfferUserPage createNewOfferUserPage = new CreateNewOfferUserPage(driver, wait, user);
-        createNewOfferUserPage.submitFreeOffer(offerFree);
-    }
-
-    public void createNewOfferFreeWithTestAccount() {
-        CreateNewOfferUserPage createNewOfferUserPage = new CreateNewOfferUserPage(driver, wait, testUser);
-        createNewOfferUserPage.submitFreeOfferWithTestAccount(offerFree);
-    }
-
-    public void verifyOffer() {
-        VerificationAdminPage verifyOfferPage = new VerificationAdminPage(driver, wait, admin);
-        verifyOfferPage.verifyOffer();
     }
 
     public void applyForFreeOffer() {

@@ -65,23 +65,12 @@ public class CreateNewOfferUserPage extends BasePage {
     @FindBy(xpath = "//p[text()='Description must be longer than 5 characters']")
     WebElement paragraphDescription;
 
-    private User user;
-
     public CreateNewOfferUserPage(WebDriver driver, WebDriverWait wait, User user) {
         super(driver, wait);
         this.user = user;
     }
 
-    public void loginAndPrecondition() {
-        LoginUserPage loginUserPage = new LoginUserPage(driver, wait);
-        loginUserPage.login(user);
-        clickOnPersonalAccountIcon();
-        clickOnDropDownCreateNewOffer();
-    }
-
-    public void loginAndPreconditionTestAccount() {
-        LoginUserPage loginUserPage = new LoginUserPage(driver, wait);
-        loginUserPage.loginTestAccount(user);
+    public void precondition() {
         clickOnPersonalAccountIcon();
         clickOnDropDownCreateNewOffer();
     }
@@ -171,7 +160,8 @@ public class CreateNewOfferUserPage extends BasePage {
     }
 
     public void saveAsDraft(CreateNewOfferFree offer) {
-        loginAndPrecondition();
+        login();
+        precondition();
         fillCreateNewOfferFree(offer);
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferFree();
@@ -185,20 +175,8 @@ public class CreateNewOfferUserPage extends BasePage {
     }
 
     public void submitFreeOffer(CreateNewOfferFree offer) {
-        loginAndPrecondition();
-        clickOnDropDownTypeOffer();
-        clickOnDropDownTypeOfferFree();
-        fillCreateNewOfferFree(offer);
-        clickOnDropDownCategory();
-        clickOnDropDownCategoryElectronic();
-        clickOnDropDownLocation();
-        clickOnDropDownLocationHessen();
-        addPhoto();
-        clickOnButtonSubmit();
-        checkElementIsDisplayed(titleCurrentPrice);
-    }
-    public void submitFreeOfferWithTestAccount(CreateNewOfferFree offer) {
-        loginAndPreconditionTestAccount();
+        login();
+        precondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferFree();
         fillCreateNewOfferFree(offer);
@@ -212,20 +190,8 @@ public class CreateNewOfferUserPage extends BasePage {
     }
 
     public void submitOfferAuction(CreateNewOfferAuction offer) {
-        loginAndPrecondition();
-        clickOnDropDownTypeOffer();
-        clickOnDropDownTypeOfferAuction();
-        fillCreateNewOfferAuction(offer);
-        clickOnDropDownCategory();
-        clickOnDropDownCategoryElectronic();
-        clickOnDropDownLocation();
-        clickOnDropDownLocationHessen();
-        addPhoto();
-        clickOnButtonSubmit();
-        checkElementIsDisplayed(titleCurrentPrice);
-    }
-    public void submitOfferAuctionWithTestAccount(CreateNewOfferAuction offer) {
-        loginAndPreconditionTestAccount();
+        login();
+        precondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferAuction();
         fillCreateNewOfferAuction(offer);
@@ -239,21 +205,8 @@ public class CreateNewOfferUserPage extends BasePage {
     }
 
     public void submitOfferAuctionWithWinBid(CreateNewOfferAuctionWinBid offer) {
-        loginAndPrecondition();
-        clickOnDropDownTypeOffer();
-        clickOnDropDownTypeOfferAuctionWithWinBid();
-        fillCreateNewOfferAuctionWinBid(offer);
-        clickOnDropDownCategory();
-        clickOnDropDownCategoryElectronic();
-        clickOnDropDownLocation();
-        clickOnDropDownLocationHessen();
-        addPhoto();
-        clickOnButtonSubmit();
-        checkElementIsDisplayed(titleCurrentPrice);
-    }
-
-    public void submitOfferAuctionWithWinBidWithTestAccount(CreateNewOfferAuctionWinBid offer) {
-        loginAndPreconditionTestAccount();
+        login();
+        precondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferAuctionWithWinBid();
         fillCreateNewOfferAuctionWinBid(offer);
@@ -267,7 +220,8 @@ public class CreateNewOfferUserPage extends BasePage {
     }
 
     public void cancelOfferAuctionWinBid(CreateNewOfferAuctionWinBid offer) {
-        loginAndPrecondition();
+        login();
+        precondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferAuctionWithWinBid();
         fillCreateNewOfferAuctionWinBid(offer);
@@ -281,7 +235,8 @@ public class CreateNewOfferUserPage extends BasePage {
     }
 
     public void copyToNewDraftOfferAuctionWithWinBid(CreateNewOfferAuctionWinBid offer) {
-        loginAndPrecondition();
+        login();
+        precondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferAuctionWithWinBid();
         fillCreateNewOfferAuctionWinBid(offer);
@@ -295,7 +250,8 @@ public class CreateNewOfferUserPage extends BasePage {
     }
 
     public void submitOfferFreeWithIncorrectTitle(CreateNewOfferFree offer) {
-        loginAndPrecondition();
+        login();
+        precondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferFree();
         fillCreateNewOfferFreeWithIncorrectTitle(offer);
@@ -309,7 +265,8 @@ public class CreateNewOfferUserPage extends BasePage {
     }
 
     public void submitOfferFreeWithIncorrectDescription(CreateNewOfferFree offer) {
-        loginAndPrecondition();
+        login();
+        precondition();
         clickOnDropDownTypeOffer();
         clickOnDropDownTypeOfferFree();
         fillCreateNewOfferFreeWithIncorrectDescription(offer);
@@ -320,5 +277,50 @@ public class CreateNewOfferUserPage extends BasePage {
         addPhoto();
         clickOnButtonSubmit();
         checkElementIsDisplayed(paragraphDescription);
+    }
+
+    public void submitFreeOfferWithTestAccount(CreateNewOfferFree offer) {
+        loginAndTestAccount();
+        precondition();
+        clickOnDropDownTypeOffer();
+        clickOnDropDownTypeOfferFree();
+        fillCreateNewOfferFree(offer);
+        clickOnDropDownCategory();
+        clickOnDropDownCategoryElectronic();
+        clickOnDropDownLocation();
+        clickOnDropDownLocationHessen();
+        addPhoto();
+        clickOnButtonSubmit();
+        checkElementIsDisplayed(titleCurrentPrice);
+    }
+
+    public void submitOfferAuctionWithTestAccount(CreateNewOfferAuction offer) {
+        loginAndTestAccount();
+        precondition();
+        clickOnDropDownTypeOffer();
+        clickOnDropDownTypeOfferAuction();
+        fillCreateNewOfferAuction(offer);
+        clickOnDropDownCategory();
+        clickOnDropDownCategoryElectronic();
+        clickOnDropDownLocation();
+        clickOnDropDownLocationHessen();
+        addPhoto();
+        clickOnButtonSubmit();
+        checkElementIsDisplayed(titleCurrentPrice);
+    }
+
+    public void submitOfferAuctionWithWinBidWithTestAccount(CreateNewOfferAuctionWinBid offer) {
+        loginAndTestAccount();
+        precondition();
+        clickOnDropDownTypeOffer();
+        clickOnDropDownTypeOfferAuctionWithWinBid();
+        fillCreateNewOfferAuctionWinBid(offer);
+        clickOnDropDownCategory();
+        clickOnDropDownCategoryElectronic();
+        clickOnDropDownLocation();
+        clickOnDropDownLocationHessen();
+        addPhoto();
+        clickOnButtonSubmit();
+        checkElementIsDisplayed(titleCurrentPrice);
     }
 }

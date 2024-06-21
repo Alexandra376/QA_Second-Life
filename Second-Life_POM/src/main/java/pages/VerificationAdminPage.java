@@ -1,7 +1,6 @@
 package pages;
 
 import model.Admin;
-import model.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,20 +27,14 @@ public class VerificationAdminPage extends BasePage {
     public void clickOnVisitWebsite() {
         clickOnElement(visitWebsite);
     }
-    private Admin admin;
 
     public VerificationAdminPage(WebDriver driver, WebDriverWait wait, Admin admin) {
         super(driver, wait);
         this.admin = admin;
     }
 
-    public void login() {
-        LoginAdminPage loginAdminPage = new LoginAdminPage(driver, wait, admin);
-        loginAdminPage.login(admin);
-    }
-
     public void verifyOffer() {
-        login();
+        loginAdmin();
         clickOnSpanOffers();
         clickOnVerificationLink();
         clickOnVerify();
