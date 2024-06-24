@@ -30,5 +30,4 @@ public class RegisterUser {
     public String getLastname() {
         return lastname;
     }
-
 }
